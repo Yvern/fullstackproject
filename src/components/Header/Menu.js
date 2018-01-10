@@ -12,7 +12,7 @@ class HeaderMenu extends React.Component {
 
         return (
             <div>
-                <Menu size='large' pointing secondary inverted stackable>
+                <Menu size='large' pointing secondary inverted>
                     <Menu.Item> <img src={logo} className="App-logo" alt="logo" /> </Menu.Item>
                     <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
                     <Menu.Item name='teams' active={activeItem === 'teams'} onClick={this.handleItemClick} />

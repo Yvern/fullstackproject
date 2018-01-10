@@ -1,0 +1,41 @@
+html {
+    min-height: 100%;
+    background-color: #f2f2f2;
+}
+
+.content-container {
+    max-width: 980px;
+    margin: 0 auto !important;
+    height: 100%;
+}
+
+.header-logo {
+    text-align: left;
+    height: 100%;
+    width: 150px;
+    float: left;
+    display: inline-grid;
+    background-color: lightsteelblue;
+}
+
+.header-content {
+    height: 100%;
+    width: 100%;
+    display: inline-grid;
+    padding-bottom: 4px;
+    background-image: linear-gradient(to right, mediumpurple 0%, #3acfd5 100%);
+}
+
+.header-content > div {
+    background: #222222;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 58px;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid lightgrey;
+}

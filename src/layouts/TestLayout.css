@@ -4,7 +4,7 @@ html {
 }
 
 .content-container {
-    max-width: 980px;
+    max-width: 1500px;
     margin: 0 auto !important;
     height: 100%;
 }
@@ -38,4 +38,22 @@ footer {
     width: 100%;
     overflow: hidden;
     border-top: 1px solid lightgrey;
+}
+
+.dashboard-left {
+    width: 25%;
+    margin: 1em;
+    display: inline-grid;
+}
+
+.dashboard-middle {
+    width: 40%;
+    margin: 1em;
+    display: inline-grid;
+}
+
+.dashboard-right {
+    width: 25%;
+    margin: 1em;
+    display: inline-grid;
 }

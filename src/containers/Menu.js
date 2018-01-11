@@ -1,6 +1,7 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
-import logo from '../../logo.svg'
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import logo from '../logo.svg'
 
 class HeaderMenu extends React.Component {
     state = { activeItem: 'home' }

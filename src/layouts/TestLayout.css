@@ -40,20 +40,57 @@ footer {
     border-top: 1px solid lightgrey;
 }
 
-.dashboard-left {
-    width: 25%;
-    margin: 1em;
-    display: inline-grid;
+@media screen and (min-width: 980px) {
+    .dashboard-left {
+        width: 25%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-middle {
+        width: 40%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-right {
+        width: 25%;
+        margin: 1em;
+        display: inline-grid;
+    }
 }
 
-.dashboard-middle {
-    width: 40%;
-    margin: 1em;
-    display: inline-grid;
+@media screen and (min-width: 580px) and (max-width: 980px) {
+    .dashboard-left {
+        width: 30%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-middle {
+        width: 60%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-right {
+        margin: 1em;
+    }
 }
 
-.dashboard-right {
-    width: 25%;
-    margin: 1em;
-    display: inline-grid;
+@media screen and (max-width: 580px) {
+    .dashboard-left {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .dashboard-middle {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .dashboard-right {
+        width: 100%;
+        margin: 1em 0;
+    }
 }

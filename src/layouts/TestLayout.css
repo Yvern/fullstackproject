@@ -80,17 +80,25 @@ footer {
 
 @media screen and (max-width: 580px) {
     .dashboard-left {
-        width: 100%;
-        margin: 1em 0;
+        width: 98%;
+        margin: 1em auto;
     }
 
     .dashboard-middle {
-        width: 100%;
-        margin: 1em 0;
+        width: 98%;
+        margin: 1em auto;
     }
 
     .dashboard-right {
-        width: 100%;
-        margin: 1em 0;
+        width: 98%;
+        margin: 1em auto;
     }
+}
+
+.event-feed {
+    width: 100%;
+}
+
+#create-event-button {
+    background-color: mediumpurple;
 }

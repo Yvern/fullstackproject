@@ -40,6 +40,12 @@ footer {
     border-top: 1px solid lightgrey;
 }
 
+/************* DASHBOARD *************/
+
+.dashboard {
+    height: 100%;
+}
+
 @media screen and (min-width: 980px) {
     .dashboard-left {
         width: 25%;
@@ -95,6 +101,8 @@ footer {
     }
 }
 
+/************ EVENTS *************/
+
 .event-feed {
     width: 100%;
 }
@@ -102,3 +110,18 @@ footer {
 #create-event-button {
     background-color: mediumpurple;
 }
+
+@media screen and (max-width: 580px) {
+    .new-event-form {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 580px){
+    .new-event-form {
+        width: 580px;
+        margin: 1em auto;
+    }
+}
+

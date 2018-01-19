@@ -3,7 +3,7 @@ import './TestLayout.css'
 
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import Dashboard from '../routes/Dashboard/components/Dashboard'
+import Dashboard from '../routes/Dashboard/containers/DashboardContainer'
 
 const TestLayout = () => (
     <div>

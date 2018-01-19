@@ -3,13 +3,16 @@
  *
  */
 
-const reducer = (state = { edited: false }, action) => {
-    switch (action.type) {
-        case 'TEST':
-            return {edited: true};
-        default:
-            return {edited: false};
-    }
-}
+import { combineReducers } from 'redux'
+
+import eventsReducer from './eventsReducer'
+
+/**
+ * Combine all reducers into a single reducer
+ * @type {Reducer<any>}
+ */
+const reducer = combineReducers({
+    events: eventsReducer
+})
 
 export default reducer

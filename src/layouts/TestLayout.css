@@ -113,7 +113,7 @@ footer {
 
 @media screen and (max-width: 580px) {
     .new-event-form {
-        width: 100%;
+        width: 98%;
         margin: 0 auto;
     }
 }

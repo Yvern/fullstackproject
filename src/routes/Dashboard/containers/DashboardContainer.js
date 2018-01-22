@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 
 import eventsReducer from '../../../modules/eventsReducer'
-import { handleAddEvent } from "../../../modules/eventsReducer";
+import { handleRequestAddEvent } from "../../../modules/eventsReducer";
+import writeNewEvent from '../../../modules/jsonWrite'
 
 import Dashboard from '../components/Dashboard'
 
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         onCreateNewEvent: (event) => {
-            dispatch(handleAddEvent(event))
+            dispatch(writeNewEvent(event))
         }
     }
 }

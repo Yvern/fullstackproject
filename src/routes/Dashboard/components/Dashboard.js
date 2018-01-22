@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
                     <Dimmer inverted
                             active={this.state.activeNewEvent}
                             onClickOutside={() => this.handleNewEventClose()}>
-                        <NewEventForm handleClose={this.handleNewEventClose.bind(this)}/>
+                        <NewEventForm handleCreateNewEvent={this.props.onCreateNewEvent} handleClose={this.handleNewEventClose.bind(this)}/>
                     </Dimmer>
 
                 </Dimmer.Dimmable>

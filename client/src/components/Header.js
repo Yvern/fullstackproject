@@ -3,45 +3,74 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
 
-class Header extends Component {
+import { Menu } from 'semantic-ui-react';
+
+class HeaderMenu extends Component {
+  state = { activeItem: 'home' };
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   renderContent() {
+    const { activeItem } = this.state;
+
     switch (this.props.auth) {
       case null:
         return;
       case false:
         return (
-          <li>
-            <a href="/auth/google">Login with Google</a>
-          </li>
+          <Menu.Menu position="right">
+            <Menu.Item active={false}>
+              <a href="/auth/google">Login with Google</a>
+            </Menu.Item>
+          </Menu.Menu>
         );
       default:
-        return [
-          <li key="1">
-            <Payments />
-          </li>,
-          <li key="2" style={{ margin: '0 10px' }}>
-            Credits: {this.props.auth.credits}
-          </li>,
-          <li key="3">
-            <a href="/api/logout">Logout</a>
-          </li>
-        ];
+        return (
+          <Menu.Menu position="right">
+            <Menu.Item name="payments" active={false}>
+              <Payments />
+            </Menu.Item>
+            <Menu.Item name="credits" onClick={this.handleItemClick}>
+              Credits: {this.props.auth.credits}
+            </Menu.Item>
+            <Menu.Item
+              name="logout"
+              active={activeItem === 'logout'}
+              onClick={this.handleItemClick}
+            >
+              <a href="/api/logout">Logout</a>
+            </Menu.Item>
+          </Menu.Menu>
+        );
     }
   }
 
   render() {
+    const { activeItem } = this.state;
+
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link
-            to={this.props.auth ? '/surveys' : '/'}
-            className="left brand-logo"
-          >
-            Emaily
-          </Link>
-          <ul className="right">{this.renderContent()}</ul>
-        </div>
-      </nav>
+      <div>
+        <Menu size="large" pointing secondary inverted>
+          <Menu.Item>
+            <Link to={this.props.auth ? '/dashboard' : '/'}>SquadSquare</Link>
+          </Menu.Item>
+          {this.renderContent()}
+        </Menu>
+      </div>
+    );
+  }
+}
+
+class Header extends Component {
+  render() {
+    return (
+      <div>
+        <header className="App-header">
+          <div className="header-content">
+            <HeaderMenu auth={this.props.auth} />
+          </div>
+        </header>
+      </div>
     );
   }
 }

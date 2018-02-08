@@ -3,6 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import TestLayout from './TestLayout';
+import routes from './routes';
+
 import Header from './Header';
 import Landing from './Landing';
 
@@ -18,12 +21,7 @@ class App extends Component {
     return (
       <div className="container">
         <BrowserRouter>
-          <div>
-            <Header />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
-          </div>
+          <TestLayout routes={routes} />
         </BrowserRouter>
       </div>
     );

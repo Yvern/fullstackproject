@@ -5,7 +5,9 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 
-import 'materialize-css/dist/css/materialize.min.css';
+//import 'materialize-css/dist/css/materialize.min.css';
+import 'babel-polyfill';
+import 'semantic-ui-css/semantic.min.css';
 
 import App from './components/App';
 import reducers from './reducers';

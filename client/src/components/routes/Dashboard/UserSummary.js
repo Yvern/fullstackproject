@@ -16,4 +16,8 @@ class UserSummary extends Component {
   }
 }
 
-export default UserSummary;
+function mapStateToProps({ user }) {
+  return { user };
+}
+
+export default connect(mapStateToProps)(UserSummary);

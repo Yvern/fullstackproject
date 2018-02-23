@@ -5,11 +5,9 @@ import {
   Header,
   Form,
   Input,
-  Label,
   TextArea,
   Button,
-  Icon,
-  Menu
+  Icon
 } from 'semantic-ui-react';
 
 class NewEventForm extends React.Component {

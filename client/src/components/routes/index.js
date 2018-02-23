@@ -1,6 +1,7 @@
-import React from 'react';
 import Landing from '../Landing';
 import Dashboard from './Dashboard/Dashboard';
+import EventCreate from '../EventForm/EventCreate';
+import EventDetail from './Events/EventDetail';
 
 //const Dashboard = () => <h2>Dashboard!</h2>;
 
@@ -18,6 +19,27 @@ const routes = [
     menu: false,
     path: '/dashboard',
     exact: true
+  },
+  {
+    name: 'Events',
+    component: Dashboard,
+    menu: true,
+    path: '/events',
+    exact: true
+  },
+  {
+    name: 'New Event',
+    component: EventCreate,
+    menu: false,
+    path: '/events/new',
+    exact: false
+  },
+  {
+    name: 'Event Detail',
+    component: EventDetail,
+    menu: false,
+    path: '/events/response',
+    exact: false
   }
 ];
 

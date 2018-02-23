@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Dimmer, Button } from 'semantic-ui-react';
 
@@ -37,15 +38,11 @@ class Dashboard extends React.Component {
               <UserSummary />
             </div>
             <div className="dashboard-middle">
-              <Button
-                id="create-event-button"
-                primary
-                fluid
-                size="huge"
-                onClick={() => this.handleNewEventOpen()}
-              >
-                Create new event!
-              </Button>
+              <Link to="/events/new">
+                <Button id="create-event-button" primary fluid size="huge">
+                  Create new event!
+                </Button>
+              </Link>
               <EventFeed />
             </div>
             <div className="dashboard-right">

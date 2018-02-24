@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "id": "100095963",
+      "email": "ngw14nuu@uea.ac.uk",
+      "password": "password",
+      "name": "Madam Tea",
+      "squads": [
+        "SQUAD01"
+      ],
+      "invitations": []
+    }
+  ],
+  "squads": [
+    {
+      "id": "SQUAD01",
+      "creatorID": "100095963",
+      "managerIDs": [
+        "100095963"
+      ],
+      "sport": {
+        "name": "Football",
+        "roles": [
+          "coach", "attacker", "defender", "midfielder", "keeper"
+        ]
+      },
+      "events": [
+        "EVENT01"
+      ],
+      "members": [
+        {
+          "email": "abcdefg@gmail.com",
+          "gamesPlayed": 0,
+          "gamesWon": 0,
+          "gamesTied": 0
+        }
+      ],
+      "totalGamesPlayed": 0
+    }
+  ],
+  "events": [
+    {
+      "id": "EVENT01",
+      "managerID": "ngw14nuu@uea.ac.uk",
+      "name": "First Match",
+      "startDate": "GMT 00:00:00 01/01/2018",
+      "endDate": "GMT 00:00:00 01/01/2018",
+      "squadID": "SQUAD01",
+      "location": {
+        "name": "UEA",
+        "longitude": 51.020328,
+        "latitude": 49.030210
+      },
+      "invitations": [
+        {
+          "eventID": "EVENT01",
+          "email": "abcdefg@gmail.com",
+          "confirmation": "PENDING"
+        },
+        {
+          "eventID": "EVENT01",
+          "email": "asdfghjkl@gmail.com",
+          "confirmation": "CONFIRMED"
+        },
+        {
+          "eventID": "EVENT01",
+          "email": "roos_hissink@live.nl",
+          "confirmation": "PENDING"
+        },
+        {
+          "eventID": "EVENT01",
+          "email": "rosehissink@gmail.com",
+          "confirmation": "DENIED"
+        }
+      ]
+    }
+  ]
+}

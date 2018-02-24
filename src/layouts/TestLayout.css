@@ -1,0 +1,127 @@
+html {
+    min-height: 100%;
+    background-color: #f2f2f2;
+}
+
+.content-container {
+    max-width: 1500px;
+    margin: 0 auto !important;
+    height: 100%;
+}
+
+.header-logo {
+    text-align: left;
+    height: 100%;
+    width: 150px;
+    float: left;
+    display: inline-grid;
+    background-color: lightsteelblue;
+}
+
+.header-content {
+    height: 100%;
+    width: 100%;
+    display: inline-grid;
+    padding-bottom: 4px;
+    background-image: linear-gradient(to right, mediumpurple 0%, #3acfd5 100%);
+}
+
+.header-content > div {
+    background: #222222;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 58px;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid lightgrey;
+}
+
+/************* DASHBOARD *************/
+
+.dashboard {
+    height: 100%;
+}
+
+@media screen and (min-width: 980px) {
+    .dashboard-left {
+        width: 25%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-middle {
+        width: 40%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-right {
+        width: 25%;
+        margin: 1em;
+        display: inline-grid;
+    }
+}
+
+@media screen and (min-width: 580px) and (max-width: 980px) {
+    .dashboard-left {
+        width: 30%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-middle {
+        width: 60%;
+        margin: 1em;
+        display: inline-grid;
+    }
+
+    .dashboard-right {
+        margin: 1em;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .dashboard-left {
+        width: 98%;
+        margin: 1em auto;
+    }
+
+    .dashboard-middle {
+        width: 98%;
+        margin: 1em auto;
+    }
+
+    .dashboard-right {
+        width: 98%;
+        margin: 1em auto;
+    }
+}
+
+/************ EVENTS *************/
+
+.event-feed {
+    width: 100%;
+}
+
+#create-event-button {
+    background-color: mediumpurple;
+}
+
+@media screen and (max-width: 580px) {
+    .new-event-form {
+        width: 98%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 580px){
+    .new-event-form {
+        width: 580px;
+        margin: 1em auto;
+    }
+}
+

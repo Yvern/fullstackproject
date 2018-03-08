@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as actions from '../../../actions';
 
 import { Dimmer, Button } from 'semantic-ui-react';
 
@@ -13,8 +15,12 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      activeNewEvent: true
+      activeNewEvent: false
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchEventsForUser();
   }
 
   handleNewEventOpen() {
@@ -35,7 +41,7 @@ class Dashboard extends React.Component {
         <Dimmer.Dimmable>
           <div className="dashboard">
             <div className="dashboard-left">
-              <UserSummary />
+              <UserSummary user={this.props.auth} events={this.props.events} />
             </div>
             <div className="dashboard-middle">
               <Link to="/events/new">
@@ -43,7 +49,7 @@ class Dashboard extends React.Component {
                   Create new event!
                 </Button>
               </Link>
-              <EventFeed />
+              <EventFeed events={this.props.events} />
             </div>
             <div className="dashboard-right">
               <TeamSummary />
@@ -66,4 +72,11 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+    events: state.events
+  };
+}
+
+export default connect(mapStateToProps, actions)(Dashboard);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 
 const EventAccessGranted = ({
-  event: { eventID, title, username, recipients },
+  event: { _id, title, username, recipients },
   recipient,
   onResponse
 }) => {
@@ -11,19 +11,15 @@ const EventAccessGranted = ({
     <div>
       <h2>Hi {recipient.email}</h2>
       <p>
-        You have been invited to the event {title} by{' '}
+        You have been invited to the event {title} ({_id}) by{' '}
         <b>TODO:Insert user name into message</b>. Please let us know if you can
         make it.
       </p>
       <div>
-        <button
-          onClick={() => onResponse({ eventID, recipient, response: true })}
-        >
+        <button onClick={() => onResponse({ _id, recipient, response: true })}>
           Yes
         </button>
-        <button
-          onClick={() => onResponse({ eventID, recipient, response: false })}
-        >
+        <button onClick={() => onResponse({ _id, recipient, response: false })}>
           No
         </button>
       </div>

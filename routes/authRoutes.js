@@ -35,6 +35,10 @@ module.exports = app => {
    * Prints out the current logged in user as saved in the cookies
    */
   app.get('/api/current_user', (req, res) => {
-    res.send(req.user);
+    if (req.user) {
+      res.send(req.user);
+    } else {
+      res.send(false);
+    }
   });
 };

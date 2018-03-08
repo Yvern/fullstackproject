@@ -8,11 +8,11 @@ const FROM_EMAIL = 'no-reply@squadsquare.com';
 /**
  * Generates personalised emails for each recipient
  */
-function generateEmails({ eventID, subject, recipients }, contentCreator) {
+function generateEmails({ _id, subject, recipients }, contentCreator) {
   return recipients.map(({ email, name }) => {
     let invite = {
       email,
-      eventID: eventID,
+      eventID: _id,
       body: EMAIL_BODY
     };
     return {
@@ -29,10 +29,10 @@ function generateEmails({ eventID, subject, recipients }, contentCreator) {
  * Handles the process of sending emails using SENDGRID
  */
 module.exports = async function send(
-  { eventID, subject, recipients },
+  { _id, subject, recipients },
   contentCreator
 ) {
-  let emails = generateEmails({ eventID, subject, recipients }, contentCreator);
+  let emails = generateEmails({ _id, subject, recipients }, contentCreator);
 
   const response = sgMail.send(emails);
   return response;

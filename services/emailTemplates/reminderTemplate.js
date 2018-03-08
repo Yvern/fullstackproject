@@ -6,7 +6,7 @@ module.exports = invite => {
       <body>
         <div style="text-align: center">
           <h3>I'd like your input!</h3>
-          <p>Please answer the following question:</p>
+          <p>We'd like to remind you to respond to an event:</p>
           <p>${invite.body}</p>
           <p>TESTING: "${keys.redirectDomain}/events/response/?event=${
     invite.eventID

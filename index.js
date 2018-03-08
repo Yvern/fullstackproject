@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 require('./models/User');
 require('./models/Event');
 require('./services/passport');
+require('./services/scheduler');
 
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');

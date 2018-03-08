@@ -10,14 +10,18 @@ class UserSummary extends Component {
         <Header as="h2" attached="top">
           USER
         </Header>
-        <Segment attached>Info</Segment>
+        <Segment attached>
+          <p>
+            Total events organised:{' '}
+            {this.props.events ? this.props.events.length : ''}
+          </p>
+          <p>
+            Pending events: {this.props.events ? this.props.events.length : ''}
+          </p>
+        </Segment>
       </Segment.Group>
     );
   }
 }
 
-function mapStateToProps({ user }) {
-  return { user };
-}
-
-export default connect(mapStateToProps)(UserSummary);
+export default UserSummary;

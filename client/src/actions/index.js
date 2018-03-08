@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_EVENT } from './types';
+import { FETCH_USER, FETCH_EVENT, FETCH_EVENTS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -17,13 +17,14 @@ export const submitEvent = (values, history) => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const fetchEvent = () => async dispatch => {
+export const fetchEventsForUser = () => async dispatch => {
+  console.log('fetch events for user');
   const res = await axios.get('/api/events');
-  dispatch({ type: FETCH_EVENT, payload: res.data });
+  dispatch({ type: FETCH_EVENTS, payload: res.data });
 };
 
-export const fetchEventRecipient = query => async dispatch => {
-  const queryURL = '/api/events/response/' + query;
+export const fetchEvent = query => async dispatch => {
+  const queryURL = '/api/events/event/' + query;
   const res = await axios.get(queryURL);
   console.log(res.data);
   dispatch({ type: FETCH_EVENT, payload: res.data });

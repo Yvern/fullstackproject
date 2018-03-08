@@ -5,7 +5,7 @@ import * as actions from '../../../actions';
 
 class EventDetail extends Component {
   componentDidMount() {
-    this.props.fetchEventRecipient(window.location.search);
+    this.props.fetchEvent(window.location.search);
     console.log(window.location.search);
   }
 

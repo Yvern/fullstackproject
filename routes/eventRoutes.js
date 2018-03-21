@@ -66,20 +66,39 @@ module.exports = app => {
    * Api call to create a new event
    */
   app.post('/api/events', requireLogin, async (req, res) => {
-    const { title, subject, body, recipients } = req.body;
+    const {
+      title,
+      squad,
+      date,
+      minimum,
+      reminderattendance,
+      reminderconfirmation,
+      recipients
+    } = req.body;
 
+    console.log('REQUEST BODY: ', req.body);
     try {
       const newEvent = new Event({
         title,
-        subject,
-        body,
+        _squad: squad,
+        subject: 'I want to invite you to an event!',
+        body: 'Please let me know if you can make it:',
+        date,
         recipients: recipients
           .split(',')
           .map(email => ({ email: email.trim() })),
         _user: req.user.id,
         dateCreated: Date.now(),
-        eventDate: Date.now(),
-        attendanceReminder: { sendDate: new Date('March 7, 2018 17:30:00') }
+        eventDate: date,
+        minimumParticipants: minimum,
+        attendanceReminder: {
+          subscribed: reminderattendance,
+          sendDate: new Date('March 7, 2018 17:30:00')
+        },
+        confirmationReminder: {
+          subscribed: reminderconfirmation,
+          sendDate: new Date('March 7, 2018 17:30:00')
+        }
       });
 
       let savedEvent = await newEvent.save();

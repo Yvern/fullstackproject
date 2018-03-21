@@ -40,19 +40,14 @@ class Dashboard extends React.Component {
       <div className="content-container">
         <Dimmer.Dimmable>
           <div className="dashboard">
+            <div className="dashboard-main">
+              <div>
+                <TeamSummary teams={[]} />
+                <EventFeed events={this.props.events} />
+              </div>
+            </div>
             <div className="dashboard-left">
               <UserSummary user={this.props.auth} events={this.props.events} />
-            </div>
-            <div className="dashboard-middle">
-              <Link to="/events/new">
-                <Button id="create-event-button" primary fluid size="huge">
-                  Create new event!
-                </Button>
-              </Link>
-              <EventFeed events={this.props.events} />
-            </div>
-            <div className="dashboard-right">
-              <TeamSummary />
             </div>
           </div>
 
@@ -75,7 +70,8 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    events: state.events
+    events: state.events,
+    squads: state.squads
   };
 }
 

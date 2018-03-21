@@ -52,7 +52,11 @@ passport.use(
       }
       //no user record with this ID, make a new User instance and save to
       //MongoDB, then inform PassportJS that the call is done
-      const user = await new User({ googleID: profile.id }).save();
+      const user = await new User({
+        googleID: profile.id,
+        email: profile.emails[0].value,
+        name: profile.displayName
+      }).save();
       done(null, user);
     }
   )

@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Segment, Header } from 'semantic-ui-react';
+import { Container, Divider, Header } from 'semantic-ui-react';
 
 class UserSummary extends Component {
+  calculatePending() {
+    this.props.events.forEach(event => {});
+  }
+
   render() {
     return (
-      <Segment.Group>
-        <Header as="h2" attached="top">
-          USER
-        </Header>
-        <Segment attached>
+      <div className="user-summary">
+        <Container fluid>
+          <Header as="h2">{this.props.user ? this.props.user.name : ''}</Header>
+          <Divider />
           <p>
-            Total events organised:{' '}
-            {this.props.events ? this.props.events.length : ''}
+            Upcoming events: {this.props.events ? this.props.events.length : 0}
           </p>
           <p>
-            Pending events: {this.props.events ? this.props.events.length : ''}
+            Pending events: {this.props.events ? this.props.events.length : 0}
           </p>
-        </Segment>
-      </Segment.Group>
+          <Divider />
+          <Header as="h3">Notifications</Header>
+        </Container>
+      </div>
     );
   }
 }

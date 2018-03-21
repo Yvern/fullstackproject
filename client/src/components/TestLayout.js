@@ -9,7 +9,7 @@ class TestLayout extends Component {
   render() {
     console.log('props', this.props);
     return (
-      <div>
+      <div id="test-layout">
         <Header />
         {this.props.routes.map((route, index) => (
           <Route key={index} {...route} />

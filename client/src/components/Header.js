@@ -27,12 +27,6 @@ class HeaderMenu extends Component {
       default:
         return (
           <Menu.Menu position="right">
-            <Menu.Item name="payments" active={false}>
-              <Payments />
-            </Menu.Item>
-            <Menu.Item name="credits" onClick={this.handleItemClick}>
-              Credits: {this.props.auth.credits}
-            </Menu.Item>
             <Menu.Item
               name="logout"
               active={activeItem === 'logout'}

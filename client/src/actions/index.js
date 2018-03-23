@@ -34,7 +34,14 @@ export const fetchEventsForUser = () => async dispatch => {
   dispatch({ type: FETCH_EVENTS, payload: res.data });
 };
 
-//redundant?
+//Clears current event data when leaving the page
+export const clearEvent = () => {
+  return {
+    type: FETCH_EVENT,
+    payload: { event: null }
+  };
+};
+
 export const fetchEvent = query => async dispatch => {
   const queryURL = '/api/events/event/' + query;
   const res = await axios.get(queryURL);

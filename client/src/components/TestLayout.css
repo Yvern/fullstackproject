@@ -39,12 +39,20 @@ body {
   }
 }
 
+#root {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+}
+
 #test-layout {
   height: 100%;
 }
 
 .content-container {
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto !important;
   height: 100%;
 }
@@ -188,6 +196,10 @@ body {
   border: 1px solid #008cba;
 }
 
+.event-card {
+  margin: 1em 0;
+}
+
 @media screen and (max-width: 580px) {
   .new-event-form {
     width: 98%;
@@ -212,4 +224,26 @@ body {
   color: darkred;
   font-family: Helvetica, sans-serif;
   font-weight: bold;
+}
+
+/************ EVENT DETAIL *************/
+
+.event-detail-container {
+  margin: 1em;
+}
+
+.event-detail-content {
+  margin-left: -1em;
+  margin-right: -1em;
+  padding: 1em;
+}
+
+.event-invitation {
+  max-width: 40em;
+  margin: 1em auto;
+}
+
+/************ GENERAL STYLING *************/
+.light-blue {
+  background-color: #45a1e7;
 }

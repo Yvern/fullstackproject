@@ -19,26 +19,34 @@ const calculateConfirmations = event => {
   return confirmations;
 };
 
-const EventCard = ({ event }) => (
-  <Card fluid>
-    <Card.Content style={{ textAlign: 'left' }}>
-      <Button circular floated="right" size="small" icon="write" />
-      <Card.Header>{event.title}</Card.Header>
-      <Card.Meta>
-        {event.squad}
-        {console.log(event)}
-      </Card.Meta>
-      <Card.Description>
-        <p>
-          Minimum Participants: <strong>{event.minimumParticipants}</strong>
-        </p>
-        <p>
-          Confirmations: <strong>{calculateConfirmations(event)}</strong>
-        </p>
-      </Card.Description>
-    </Card.Content>
-  </Card>
-);
+const EventCard = ({ event }) => {
+  let queryURL = 'events/details/?event=' + event._id;
+  return (
+    <div className="event-card">
+      <Link to={queryURL}>
+        <Card fluid>
+          <Card.Content style={{ textAlign: 'left' }}>
+            <Button circular floated="right" size="small" icon="write" />
+            <Card.Header>{event.title}</Card.Header>
+            <Card.Meta>
+              {event.squad}
+              {console.log(event)}
+            </Card.Meta>
+            <Card.Description>
+              <p>
+                Minimum Participants:{' '}
+                <strong>{event.minimumParticipants}</strong>
+              </p>
+              <p>
+                Confirmations: <strong>{calculateConfirmations(event)}</strong>
+              </p>
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Link>
+    </div>
+  );
+};
 
 const EventFeed = ({ events }) => (
   <div className="event-feed">

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EventRecipientView from './EventRecipientView';
+import EventOverview from './EventOverview';
 import * as actions from '../../../actions';
 import { Segment, Header, Loader, Dimmer } from 'semantic-ui-react';
 
-class EventDetail extends Component {
+class EventDetails extends Component {
   componentDidMount() {
     this.props.fetchEvent(window.location.search);
     console.log(window.location.search);
+  }
+
+  componentWillUnmount() {
+    this.props.clearEvent();
   }
 
   renderContent() {
@@ -25,7 +29,7 @@ class EventDetail extends Component {
       default:
         return (
           <div>
-            <EventRecipientView event={this.props.event} />
+            <EventOverview event={this.props.event} />
           </div>
         );
     }
@@ -70,4 +74,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(EventDetail);
+export default connect(mapStateToProps, actions)(EventDetails);

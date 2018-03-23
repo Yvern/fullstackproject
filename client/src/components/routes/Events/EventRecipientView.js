@@ -1,27 +1,85 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import {
+  Header,
+  Segment,
+  Button,
+  Table,
+  Divider,
+  Icon
+} from 'semantic-ui-react';
 
 const EventAccessGranted = ({
   event: { _id, title, username, recipients },
   recipient,
   onResponse
 }) => {
+  function renderRecipientList() {
+    let listItems = recipients.map(recip => {
+      let response = <Icon name="help" color="grey" />;
+      let responseText = 'Not responded';
+      if (recip.responded) {
+        response = recip.attending ? (
+          <Icon name="checkmark" color="green" />
+        ) : (
+          <Icon name="cancel" color="red" />
+        );
+        responseText = recip.attending ? 'Attending' : 'Cancelled';
+      }
+
+      return (
+        <Table.Row>
+          <Table.Cell floated="left">{recip.email}</Table.Cell>
+          <Table.Cell floated="right">
+            {response}
+            {responseText}
+          </Table.Cell>
+        </Table.Row>
+      );
+    });
+
+    return (
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Participant</Table.HeaderCell>
+            <Table.HeaderCell>Response</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>{listItems}</Table.Body>
+      </Table>
+    );
+  }
+
   return (
     <div>
-      <h2>Hi {recipient.email}</h2>
-      <p>
-        You have been invited to the event {title} ({_id}) by{' '}
-        <b>TODO:Insert user name into message</b>. Please let us know if you can
-        make it.
-      </p>
-      <div>
-        <button onClick={() => onResponse({ _id, recipient, response: true })}>
+      <div className="event-invitation">
+        <Header as="h2">Hi {recipient.email}</Header>
+        You have been invited to the event '{title}' by{' '}
+        <b>TODO:Insert user name into message</b>. Please let them know if you
+        can make it.
+        {renderRecipientList()}
+        {recipient.responded ? (
+          <p>
+            Thank you for your response! You can still change your mind if you
+            need to:{' '}
+          </p>
+        ) : (
+          ''
+        )}
+        <Button
+          positive
+          onClick={() => onResponse({ _id, recipient, response: true })}
+        >
           Yes
-        </button>
-        <button onClick={() => onResponse({ _id, recipient, response: false })}>
+        </Button>
+        <Button
+          negative
+          onClick={() => onResponse({ _id, recipient, response: false })}
+        >
           No
-        </button>
+        </Button>
       </div>
     </div>
   );

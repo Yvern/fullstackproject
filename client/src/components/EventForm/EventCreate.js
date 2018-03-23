@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import EventForm from './EventForm';
 import EventFormConfirm from './EventFormConfirm';
+import { Message, Header, Segment, Icon } from 'semantic-ui-react';
 
 class EventCreate extends Component {
   state = { showFormConfirm: false };
@@ -23,7 +24,17 @@ class EventCreate extends Component {
   }
 
   render() {
-    return <div>{this.renderContent()}</div>;
+    return (
+      <div className="create-event-form-container">
+        <Message attached style={{ height: '4em' }}>
+          <Header floated="left">
+            <Icon name="add to calendar" color="blue" />Create a New Event
+          </Header>
+          <Icon link name="close" size="large" color="red" />
+        </Message>
+        <Segment attached="bottom">{this.renderContent()}</Segment>
+      </div>
+    );
   }
 }
 

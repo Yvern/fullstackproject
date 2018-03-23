@@ -11,9 +11,11 @@ class TestLayout extends Component {
     return (
       <div id="test-layout">
         <Header />
-        {this.props.routes.map((route, index) => (
-          <Route key={index} {...route} />
-        ))}
+        <div className="content-container">
+          {this.props.routes.map((route, index) => (
+            <Route key={index} {...route} />
+          ))}
+        </div>
         <Footer />
       </div>
     );

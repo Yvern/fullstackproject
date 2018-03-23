@@ -51,6 +51,7 @@ module.exports = app => {
     res.send(savedEvent);
   });
 
+  //Get all events for the logged in user
   app.get('/api/events', async (req, res) => {
     //console.log(req.user);
     if (req.user) {

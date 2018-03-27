@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import EventTextField from './EventTextField';
+import FormTextField from '../FormTextField';
+import FormDropdown from '../FormDropdown';
 import { Link } from 'react-router-dom';
-import validateEmails from '../../utils/validateEmail';
+import validateEmails from '../../../utils/validateEmail';
 import formFields from './formFields';
 import {
   Form,
@@ -14,53 +15,59 @@ import {
   Segment,
   Header,
   Icon,
-  Divider
+  Divider,
+  Dropdown
 } from 'semantic-ui-react';
-import Datetime from '../DateTimePicker';
-
-const ToggleOption = ({ label }) => <Checkbox label={label} />;
+import Datetime from '../../DateTimePicker';
 
 class EventForm extends Component {
   renderFields() {
-    return formFields.map(({ name, label, type }) => {
-      if (type === 'toggle') {
+    return formFields.map(({ name, label, type, page }) => {
+      if (page === 1) {
+        if (type === 'squad') {
+          let options = this.props.squads.map(squad => ({
+            text: squad.name,
+            value: squad._id
+          }));
+          return (
+            <Field
+              key={name}
+              name={name}
+              label={label}
+              options={options}
+              placeholder="Select Team"
+              component={FormDropdown}
+            />
+          );
+        }
+
+        if (type === 'date') {
+          return (
+            <Field key={name} name={name} label={label} component={Datetime} />
+          );
+        }
+
+        if (type === 'email') {
+          return (
+            <Field
+              key={name}
+              name={name}
+              label={label}
+              type="text"
+              component={FormTextField}
+            />
+          );
+        }
         return (
           <Field
             key={name}
             name={name}
             label={label}
-            type="toggle"
-            component={ToggleOption}
+            type={type}
+            component={FormTextField}
           />
         );
       }
-
-      if (type === 'date') {
-        return (
-          <Field key={name} name={name} label={label} component={Datetime} />
-        );
-      }
-
-      if (type === 'email') {
-        return (
-          <Field
-            key={name}
-            name={name}
-            label={label}
-            type="text"
-            component={EventTextField}
-          />
-        );
-      }
-      return (
-        <Field
-          key={name}
-          name={name}
-          label={label}
-          type={type}
-          component={EventTextField}
-        />
-      );
     });
   }
 

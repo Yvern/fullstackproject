@@ -56,7 +56,6 @@ module.exports = app => {
     //console.log(req.user);
     if (req.user) {
       let events = await Event.find({ _user: req.user._id });
-      console.log(events);
       res.send(events);
     } else {
       res.send(false);
@@ -77,17 +76,12 @@ module.exports = app => {
       recipients
     } = req.body;
 
-    console.log('REQUEST BODY: ', req.body);
     try {
-      const newEvent = new Event({
+      let eventInfo = {
         title,
-        _squad: squad,
         subject: 'I want to invite you to an event!',
         body: 'Please let me know if you can make it:',
         date,
-        recipients: recipients
-          .split(',')
-          .map(email => ({ email: email.trim() })),
         _user: req.user.id,
         dateCreated: Date.now(),
         eventDate: date,
@@ -100,18 +94,30 @@ module.exports = app => {
           subscribed: reminderconfirmation,
           sendDate: new Date('March 7, 2018 17:30:00')
         }
-      });
+      };
+
+      if (squad) {
+        eventInfo._squad = squad;
+      }
+
+      if (recipients) {
+        eventInfo.recipients = recipients
+          .split(',')
+          .map(email => ({ email: email.trim() }));
+      }
+
+      const newEvent = new Event(eventInfo);
 
       let savedEvent = await newEvent.save();
 
       //await sgMail.send(emails);
-      await mailSend(savedEvent, inviteTemplate);
+      //await mailSend(savedEvent, inviteTemplate);
 
       //update user account credits
       //req.user.credits -= 1;
       const user = await req.user.save();
 
-      res.send(user);
+      res.send(savedEvent);
     } catch (err) {
       res.status(422).send(err);
     }

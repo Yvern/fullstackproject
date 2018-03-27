@@ -12,7 +12,7 @@ import {
   Icon
 } from 'semantic-ui-react';
 
-const EventOverview = ({ event }) => {
+const EventEditView = ({ event, onSave, onCancel }) => {
   function countResponses() {
     var count = 0;
     event.recipients.forEach(recip => {
@@ -181,10 +181,11 @@ const EventOverview = ({ event }) => {
 
   return (
     <div className="event-invitation">
+      <Header as="h3">Editing</Header>
       {renderDetails()}
       {renderRecipientList()}
     </div>
   );
 };
 
-export default connect(null, actions)(EventOverview);
+export default EventEditView;

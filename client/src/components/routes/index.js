@@ -1,10 +1,9 @@
 import Landing from '../Landing';
 import Dashboard from './Dashboard/Dashboard';
-import EventCreate from '../EventForm/EventCreate';
+import EventCreate from '../Forms/EventForm/EventCreate';
 import EventDetail from './Events/EventDetail';
 import EventDetails from './Events/EventDetails';
-
-//const Dashboard = () => <h2>Dashboard!</h2>;
+import SquadCreate from '../Forms/SquadForm/SquadCreate';
 
 const routes = [
   {
@@ -47,6 +46,13 @@ const routes = [
     component: EventDetails,
     menu: false,
     path: '/events/details',
+    exact: false
+  },
+  {
+    name: 'New Squad',
+    component: SquadCreate,
+    menu: false,
+    path: '/squads/new',
     exact: false
   }
 ];

@@ -8,7 +8,6 @@ import { Dimmer, Button } from 'semantic-ui-react';
 import EventFeed from './EventFeed';
 import UserSummary from './UserSummary';
 import TeamSummary from './TeamSummary';
-import NewEventForm from './NewEventForm';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -21,47 +20,23 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.fetchEventsForUser();
-  }
-
-  handleNewEventOpen() {
-    this.setState({
-      activeNewEvent: true
-    });
-  }
-
-  handleNewEventClose() {
-    this.setState({
-      activeNewEvent: false
-    });
+    this.props.fetchSquadsForUser();
   }
 
   render() {
     return (
       <div className="content-container">
-        <Dimmer.Dimmable>
-          <div className="dashboard">
-            <div className="dashboard-main">
-              <div>
-                <TeamSummary teams={[]} />
-                <EventFeed events={this.props.events} />
-              </div>
-            </div>
-            <div className="dashboard-left">
-              <UserSummary user={this.props.auth} events={this.props.events} />
+        <div className="dashboard">
+          <div className="dashboard-main">
+            <div>
+              <TeamSummary squads={this.props.squads} />
+              <EventFeed events={this.props.events} />
             </div>
           </div>
-
-          <Dimmer
-            inverted
-            active={this.state.activeNewEvent}
-            onClickOutside={() => this.handleNewEventClose()}
-          >
-            <NewEventForm
-              handleCreateNewEvent={this.props.onCreateNewEvent}
-              handleClose={this.handleNewEventClose.bind(this)}
-            />
-          </Dimmer>
-        </Dimmer.Dimmable>
+          <div className="dashboard-left">
+            <UserSummary user={this.props.auth} events={this.props.events} />
+          </div>
+        </div>
       </div>
     );
   }

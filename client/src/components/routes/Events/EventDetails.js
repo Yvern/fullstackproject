@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EventOverview from './EventOverview';
+import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
-import { Segment, Header, Loader, Dimmer } from 'semantic-ui-react';
+import {
+  Segment,
+  Header,
+  Loader,
+  Dimmer,
+  Grid,
+  Button,
+  Icon
+} from 'semantic-ui-react';
+import EventOverview from './EventOverview';
+import EventEditView from './EventEditView';
 
 class EventDetails extends Component {
+  state = { editing: false };
+
   componentDidMount() {
     this.props.fetchEvent(window.location.search);
     console.log(window.location.search);
@@ -12,6 +24,11 @@ class EventDetails extends Component {
 
   componentWillUnmount() {
     this.props.clearEvent();
+  }
+
+  onEditSave() {
+    this.setState({ editing: true });
+    console.log('EDITED');
   }
 
   renderContent() {
@@ -29,7 +46,7 @@ class EventDetails extends Component {
       default:
         return (
           <div>
-            <EventOverview event={this.props.event} />
+            <EventOverview event={this.props.event.event} />
           </div>
         );
     }
@@ -45,12 +62,35 @@ class EventDetails extends Component {
       eventSquad = ' | ' + this.props.event.event._squad;
     }
     return (
-      <Header as="h1" textAlign="center">
-        {eventTitle}
-        <Header.Subheader>
-          {eventCreator} {eventSquad}
-        </Header.Subheader>
-      </Header>
+      <Grid columns={3}>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Link to="/events">
+              <Button color="blue" icon labelPosition="left">
+                <Icon name="left arrow" />Back
+              </Button>
+            </Link>
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <Header as="h1" textAlign="center">
+              {eventTitle}
+              <Header.Subheader>
+                {eventCreator} {eventSquad}
+              </Header.Subheader>
+            </Header>
+          </Grid.Column>
+          <Grid.Column width={3}>
+            <Button
+              color="blue"
+              circular
+              floated="right"
+              size="large"
+              icon="write"
+              onClick={() => this.setState({ editing: true })}
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 
@@ -61,7 +101,17 @@ class EventDetails extends Component {
           {this.renderHeader()}
         </Segment>
         <Segment attached="bottom">
-          <div>{this.renderContent()}</div>
+          <div>
+            {this.state.editing ? (
+              <EventEditView
+                event={this.props.event.event}
+                onSave={this.onEditSave}
+                onCancel={() => this.setState({ editing: true })}
+              />
+            ) : (
+              this.renderContent()
+            )}
+          </div>
         </Segment>
       </div>
     );

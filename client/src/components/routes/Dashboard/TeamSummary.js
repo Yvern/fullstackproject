@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {
   Container,
   Segment,
@@ -63,18 +63,21 @@ const renderSquads = squads => {
 const CreateNewTeam = () => (
   <div className="squad-segment create-squad-segment">
     <div>
-      <Button id="create-new-squad-button" fluid>
-        New Squad{' '}
-        <span style={{ marginLeft: '5px', marginRight: '0' }}>
-          <Icon name="add circle" color="blue" />
-        </span>
-      </Button>
+      <Link to="/squads/new">
+        <Button id="create-new-squad-button" fluid>
+          New Squad{' '}
+          <span style={{ marginLeft: '5px', marginRight: '0' }}>
+            <Icon name="add circle" color="blue" />
+          </span>
+        </Button>
+      </Link>
     </div>
   </div>
 );
 
-const TeamSummary = () => (
+const TeamSummary = ({ squads }) => (
   <div className="squad-feed">
+    {console.log('squads', squads)}
     <Container fluid>
       <div className="feed-header">
         <Grid columns={2}>
@@ -84,16 +87,18 @@ const TeamSummary = () => (
             </Header>
           </Grid.Column>
           <Grid.Column>
-            <Button color="blue">
-              Create New Squad{' '}
-              <span style={{ marginLeft: '5px', marginRight: '0' }}>
-                <Icon name="add circle" />
-              </span>
-            </Button>
+            <Link to="/squads/new">
+              <Button color="blue">
+                Create New Squad{' '}
+                <span style={{ marginLeft: '5px', marginRight: '0' }}>
+                  <Icon name="add circle" />
+                </span>
+              </Button>
+            </Link>
           </Grid.Column>
         </Grid>
       </div>
-      <div className="feed-content">{renderSquads(TEST_SQUAD_VALUES)}</div>
+      <div className="feed-content">{renderSquads(squads)}</div>
     </Container>
   </div>
 );

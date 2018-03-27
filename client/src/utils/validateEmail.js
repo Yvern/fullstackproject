@@ -4,10 +4,13 @@ const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0
 * Extracts any invalid emails from the provided list of emails
 */
 export default emails => {
-  const invalidEmails = emails
-    .split(',')
-    .map(email => email.trim())
-    .filter(email => !re.test(email));
+  let invalidEmails = [];
+  if (emails) {
+    invalidEmails = emails
+      .split(',')
+      .map(email => email.trim())
+      .filter(email => !re.test(email));
+  }
 
   if (invalidEmails.length) {
     return `These emails are invalid: ${invalidEmails}`;

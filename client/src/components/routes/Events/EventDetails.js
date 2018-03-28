@@ -27,7 +27,7 @@ class EventDetails extends Component {
   }
 
   onEditSave() {
-    this.setState({ editing: true });
+    this.setState({ editing: false });
     console.log('EDITED');
   }
 

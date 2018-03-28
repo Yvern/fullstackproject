@@ -11,7 +11,6 @@ export default ({
 }) => {
   return (
     <div>
-      {console.log('input', input)}
       <Form.Select
         name="squad"
         value={input.value}

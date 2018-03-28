@@ -55,7 +55,6 @@ const renderSquads = squads => {
           </Card>
         </div>
       ))}
-      <CreateNewTeam />
     </Card.Group>
   );
 };

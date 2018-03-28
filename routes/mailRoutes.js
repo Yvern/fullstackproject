@@ -16,6 +16,7 @@ module.exports = app => {
   app.post('/api/mail/event/invite', requireLogin, async (req, res) => {
     let event = await Event.findById(req.body.event.id);
 
+    //only invite recipients who haven't been invited before
     let filteredRecipients = event.recipients.filter(recip => {
       return !recip.invited;
     });

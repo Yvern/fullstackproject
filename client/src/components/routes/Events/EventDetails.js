@@ -46,7 +46,15 @@ class EventDetails extends Component {
       default:
         return (
           <div>
-            <EventOverview event={this.props.event.event} />
+            {this.state.editing ? (
+              <EventEditView
+                event={this.props.event.event}
+                onSave={this.onEditSave}
+                onCancel={() => this.setState({ editing: true })}
+              />
+            ) : (
+              <EventOverview event={this.props.event.event} />
+            )}
           </div>
         );
     }
@@ -101,17 +109,7 @@ class EventDetails extends Component {
           {this.renderHeader()}
         </Segment>
         <Segment attached="bottom">
-          <div>
-            {this.state.editing ? (
-              <EventEditView
-                event={this.props.event.event}
-                onSave={this.onEditSave}
-                onCancel={() => this.setState({ editing: true })}
-              />
-            ) : (
-              this.renderContent()
-            )}
-          </div>
+          <div>{this.renderContent()}</div>
         </Segment>
       </div>
     );

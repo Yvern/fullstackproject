@@ -11,81 +11,30 @@ import {
   Divider,
   Icon
 } from 'semantic-ui-react';
+import RecipientList from './RecipientList';
+import AddParticipant from './AddParticipant';
 
-const EventOverview = ({ event }) => {
-  function countResponses() {
-    var count = 0;
-    event.recipients.forEach(recip => {
-      if (recip.attending) {
-        count++;
-      }
-    });
-    return count;
+class EventOverview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showAddParticipant: false };
+    this.showAddParticipant = this.showAddParticipant.bind(this);
+    this.hideAddParticipant = this.hideAddParticipant.bind(this);
   }
 
-  function renderRecipientList() {
-    let numOfConfirmations = countResponses();
-    let listItems = event.recipients.map(recip => {
-      let response = <Icon name="help" color="grey" />;
-      let responseText = 'Not responded';
-      if (recip.responded) {
-        response = recip.attending ? (
-          <Icon name="checkmark" color="green" />
-        ) : (
-          <Icon name="cancel" color="red" />
-        );
-        responseText = recip.attending ? 'Attending' : 'Cancelled';
-      }
-
-      return (
-        <Table.Row>
-          <Table.Cell floated="left">{recip.email}</Table.Cell>
-          <Table.Cell floated="right">
-            {response}
-            {responseText}
-          </Table.Cell>
-        </Table.Row>
-      );
-    });
-
-    return (
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Participant</Table.HeaderCell>
-            <Table.HeaderCell>Response</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>{listItems}</Table.Body>
-
-        <Table.Footer>
-          <Table.Row
-            positive={numOfConfirmations >= event.minimumParticipants}
-            negative={numOfConfirmations < event.minimumParticipants}
-          >
-            <Table.Cell>
-              <Header as="h4">Total attending:</Header>
-            </Table.Cell>
-            <Table.Cell>
-              <Header as="h4">
-                {numOfConfirmations}{' '}
-                {event.minimumParticipants > 0
-                  ? '/' + event.minimumParticipants
-                  : ''}
-              </Header>
-            </Table.Cell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
-    );
+  showAddParticipant() {
+    this.setState({ showAddParticipant: true });
   }
 
-  function renderDetails() {
-    let formattedDate = moment(event.eventDate).format(
+  hideAddParticipant() {
+    this.setState({ showAddParticipant: false });
+  }
+
+  renderDetails() {
+    let formattedDate = moment(this.props.event.eventDate).format(
       'ddd, D MMM YYYY, h:mm a'
     );
-    let location = event.location ? event.location : 'No location given';
+    let location = this.props.event.location || 'No location given';
     let notifications = (
       <Table basic="very" compact>
         <Table.Body>
@@ -103,12 +52,12 @@ const EventOverview = ({ event }) => {
           <Table.Row columns={3}>
             <Table.Cell width={5}>Reminder</Table.Cell>
             <Table.Cell width={7}>
-              {moment(event.attendanceReminder.sendDate).format(
+              {moment(this.props.event.attendanceReminder.sendDate).format(
                 'DD/MM/YYYY hh:mm'
               )}
             </Table.Cell>
             <Table.Cell width={4}>
-              {event.attendanceReminder.sent ? (
+              {this.props.event.attendanceReminder.sent ? (
                 <Icon name="checkmark" color="green" />
               ) : (
                 <Icon name="cancel" color="red" />
@@ -118,12 +67,12 @@ const EventOverview = ({ event }) => {
           <Table.Row>
             <Table.Cell width={5}>Confirmation</Table.Cell>
             <Table.Cell width={7}>
-              {moment(event.attendanceReminder.sendDate).format(
+              {moment(this.props.event.attendanceReminder.sendDate).format(
                 'DD/MM/YYYY hh:mm'
               )}
             </Table.Cell>
             <Table.Cell width={4}>
-              {event.attendanceReminder.sent ? (
+              {this.props.event.attendanceReminder.sent ? (
                 <Icon name="checkmark" color="green" />
               ) : (
                 <Icon name="cancel" color="red" />
@@ -145,7 +94,7 @@ const EventOverview = ({ event }) => {
         key: 'minimum',
         icon: 'group',
         label: 'Minimum participants',
-        value: event.minimumParticipants
+        value: this.props.event.minimumParticipants
       },
       {
         key: 'location',
@@ -179,12 +128,34 @@ const EventOverview = ({ event }) => {
     );
   }
 
-  return (
-    <div className="event-invitation">
-      {renderDetails()}
-      {renderRecipientList()}
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="event-invitation">
+        {this.renderDetails()}
+        <RecipientList event={this.props.event} />
+        {this.state.showAddParticipant ? (
+          <AddParticipant
+            event={this.props.event}
+            onCancel={this.hideAddParticipant}
+          />
+        ) : (
+          ''
+        )}
+        <Button color="blue" onClick={this.showAddParticipant}>
+          Add Participant <Icon name="add circle" />
+        </Button>
+        <Button
+          positive
+          icon
+          labelPosition="right"
+          floated="right"
+          onClick={() => this.props.sendMail(this.props.event)}
+        >
+          Send Invites <Icon name="send outline" />
+        </Button>
+      </div>
+    );
+  }
+}
 
 export default connect(null, actions)(EventOverview);

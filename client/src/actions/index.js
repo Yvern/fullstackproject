@@ -55,6 +55,15 @@ export const registerEventResponse = response => async dispatch => {
   });
 };
 
+/******** EVENT EDIT ACTIONS ********/
+export const addEventRecipient = (event, recipient) => async dispatch => {
+  const res = await axios.post('/api/events/addrecipient', {
+    event,
+    recipient
+  });
+  dispatch({ type: FETCH_EVENT, payload: { event: res.data } });
+};
+
 /******** SQUAD ACTIONS ********/
 
 export const submitSquad = (values, history) => async dispatch => {
@@ -66,4 +75,10 @@ export const submitSquad = (values, history) => async dispatch => {
 export const fetchSquadsForUser = () => async dispatch => {
   const res = await axios.get('/api/squads');
   dispatch({ type: FETCH_SQUADS, payload: res.data });
+};
+
+/******** EMAIL ACTIONS ********/
+export const sendMail = event => async dispatch => {
+  const res = await axios.post('/api/mail/event/invite', event);
+  dispatch({ type: FETCH_EVENT, payload: { event: res.data } });
 };

@@ -14,6 +14,7 @@ const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const squadRoutes = require('./routes/squadRoutes');
+const mailRoutes = require('./routes/mailRoutes');
 const keys = require('./config/keys');
 
 mongoose.connect(keys.mongoURI);
@@ -38,6 +39,7 @@ authRoutes(app);
 billingRoutes(app);
 eventRoutes(app);
 squadRoutes(app);
+mailRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   //Express will serve up production assests, e.g. main.js / main.css

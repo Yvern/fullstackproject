@@ -52,7 +52,7 @@ module.exports = app => {
   });
 
   //Get all events for the logged in user
-  app.get('/api/events', async (req, res) => {
+  app.get('/api/events', requireLogin, async (req, res) => {
     //console.log(req.user);
     if (req.user) {
       let events = await Event.find({ _user: req.user._id });
@@ -116,6 +116,28 @@ module.exports = app => {
       //update user account credits
       //req.user.credits -= 1;
       const user = await req.user.save();
+
+      res.send(savedEvent);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  app.post('/api/events/addrecipient', requireLogin, async (req, res) => {
+    console.log(req.body);
+    try {
+      let event = await Event.findById(req.body.event._id);
+      let recipient = {
+        email: req.body.recipient.email.trim(),
+        name: req.body.recipient.name
+      };
+
+      //add new recipient to list
+      event.recipients.push(recipient);
+
+      console.log(event.recipients);
+
+      let savedEvent = await event.save();
 
       res.send(savedEvent);
     } catch (err) {

@@ -9,24 +9,31 @@ const keys = require('../config/keys');
 sgMail.setApiKey(keys.sendGridKey);
 
 const Event = mongoose.model('Event');
-const Squad = mongoose.model('Squad');
 
 module.exports = app => {
   //send email for event
   app.post('/api/mail/event/invite', requireLogin, async (req, res) => {
-    let event = await Event.findById(req.body.event.id);
+    console.log(req.body._id);
+    try {
+      let event = await Event.findById(req.body._id);
+      //only invite recipients who haven't been invited before
+      let filteredRecipients = event.recipients.filter(recip => {
+        return !recip.invited;
+      });
 
-    //only invite recipients who haven't been invited before
-    let filteredRecipients = event.recipients.filter(recip => {
-      return !recip.invited;
-    });
+      let eventCopy = JSON.parse(JSON.stringify(event));
 
-    let eventCopy = JSON.parse(JSON.stringify(event));
-    eventCopy.recipients = reminderRecipients;
+      //eventCopy.recipients = reminderRecipients;
 
-    await mailSend(eventCopy, inviteTemplate);
+      console.log(eventCopy.recipients);
+      await mailSend(eventCopy, inviteTemplate);
 
-    event.recipients.forEach(recip => (recip.invited = true));
-    console.log(event);
+      event.recipients.forEach(recip => (recip.invited = true));
+      let savedEvent = await event.save();
+      console.log(savedEvent);
+      res.send(savedEvent);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 };

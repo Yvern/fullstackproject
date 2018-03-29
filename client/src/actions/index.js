@@ -72,6 +72,12 @@ export const submitSquad = (values, history) => async dispatch => {
   dispatch({ type: FETCH_SQUAD, payload: res.data });
 };
 
+export const fetchSquad = query => async dispatch => {
+  const queryURL = '/api/squads/squad/' + query;
+  const res = await axios.get(queryURL);
+  dispatch({ type: FETCH_SQUAD, payload: res.data });
+};
+
 export const fetchSquadsForUser = () => async dispatch => {
   const res = await axios.get('/api/squads');
   dispatch({ type: FETCH_SQUADS, payload: res.data });

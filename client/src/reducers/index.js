@@ -3,6 +3,7 @@ import authReducer from './authReducer';
 import eventResponseReducer from './eventResponseReducer';
 import userEventsReducer from './userEventsReducer';
 import userSquadsReducer from './userSquadsReducer';
+import squadDataReducer from './squadDataReducer';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   events: userEventsReducer,
   squads: userSquadsReducer,
   form: formReducer,
-  eventResponse: eventResponseReducer
+  eventResponse: eventResponseReducer,
+  squadData: squadDataReducer
 });

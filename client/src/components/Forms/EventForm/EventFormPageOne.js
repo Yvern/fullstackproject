@@ -99,6 +99,9 @@ function validate(values) {
   const errors = {};
 
   errors.recipients = validateEmails(values.recipients || '');
+  if (values.date < new Date()) {
+    errors.date = 'Please provide a date in the future.';
+  }
 
   formFields.forEach(({ name, required, noValueError }) => {
     if (!values[name] && required) {

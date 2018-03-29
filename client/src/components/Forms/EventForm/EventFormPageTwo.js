@@ -22,7 +22,9 @@ import {
   Dropdown
 } from 'semantic-ui-react';
 
-const ToggleOption = ({ label }) => <Checkbox label={label} />;
+const ToggleOption = ({ input, label }) => (
+  <Checkbox {...input} label={label} />
+);
 
 class EventFormPageTwo extends Component {
   renderFields() {
@@ -36,23 +38,6 @@ class EventFormPageTwo extends Component {
               label={label}
               type="toggle"
               component={ToggleOption}
-            />
-          );
-        }
-
-        if (type === 'squad') {
-          let options = this.props.squads.map(squad => ({
-            text: squad.name,
-            value: squad._id
-          }));
-          return (
-            <Field
-              key={name}
-              name={name}
-              label={label}
-              options={options}
-              placeholder="Select Team"
-              component={FormDropdown}
             />
           );
         }

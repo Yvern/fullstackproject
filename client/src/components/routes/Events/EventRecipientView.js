@@ -59,7 +59,6 @@ const EventAccessGranted = ({
         You have been invited to the event '{title}' by{' '}
         <b>TODO:Insert user name into message</b>. Please let them know if you
         can make it.
-        {renderRecipientList()}
         {recipient.responded ? (
           <p>
             Thank you for your response! You can still change your mind if you
@@ -80,6 +79,7 @@ const EventAccessGranted = ({
         >
           No
         </Button>
+        {renderRecipientList()}
       </div>
     </div>
   );

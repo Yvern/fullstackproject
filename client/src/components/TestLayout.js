@@ -16,7 +16,6 @@ class TestLayout extends Component {
             <Route key={index} {...route} />
           ))}
         </div>
-        <Footer />
       </div>
     );
   }

@@ -2,22 +2,62 @@ const keys = require('../../config/keys');
 
 module.exports = invite => {
   return `
-    <html>
-      <body>
-        <div style="text-align: center">
-          <h3>I'd like your input!</h3>
-          <p>Please answer the following question:</p>
-          <p>${invite.body}</p>
-          <p>TESTING: "${keys.redirectDomain}/events/response/?event=${
-    invite.eventID
-  }&recipient=${invite.email}"</p>
-          <div>
-            <a href="${keys.redirectDomain}/events/response/?event=${
-    invite.eventID
-  }&recipient=${invite.email}"/>Go to the event!</a>
-          </div>
+  <html>
+    <body style=	"font-family: Helvetica, Arial, sans-serif;
+        background-color: #ededed">
+      <div style= "
+        margin: 3em;
+        padding: 2em;
+        background-color: white;
+        border: 1px solid lightgrey;
+        border-radius: 4px;">
+        <div>
+        <a style="text-decoration: none" href="https://squadsquare-test.herokuapp.com/">
+        <h2 style="color: dodgerblue;">SquadSquare</h2>
+        </a>
         </div>
-      </body>
-    </html>
+
+        <p>You've been invited to the sports event ${invite.title} by ${
+    invite.senderName
+  }. </p>
+        <p>Please let them know if you can make it: </p>
+
+        <div>
+          <a href="${keys.redirectDomain}/events/response/?event=${
+    invite.eventID
+  }&recipient=${invite.email}"/>
+    <button style=	"background-color: dodgerblue;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0.5em 1em;
+            border-radius: 3px;">
+            Respond Now
+    </button>
+    </a>
+        </div>
+      </div>
+  <div style="margin: 3em;
+        padding: 2em;
+        padding-top: 0;
+        color: grey">
+    <p>Create your own sports event at SquadSquare:</p>
+    <a href="https://squadsquare-test.herokuapp.com/">
+    <button style=	"background-color: grey;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0.5em 1em;
+            border-radius: 3px;">
+            Sign Up
+            </button>
+    </a>
+  </div>
+    </body>
+</html>
   `;
 };

@@ -27,7 +27,8 @@ module.exports = app => {
       eventCopy.recipients = filteredRecipients;
 
       console.log('reminderRecipients:', filteredRecipients);
-      await mailSend(eventCopy, inviteTemplate);
+      console.log('User: ', req.user);
+      await mailSend(eventCopy, inviteTemplate, req.user);
 
       event.recipients.forEach(recip => (recip.invited = true));
       let savedEvent = await event.save();

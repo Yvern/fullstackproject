@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import './TestLayout.css';
+import '../css/style.css';
 
-import Header from './Header';
+import Nav from './Nav';
 import Footer from './Footer';
 
+/*
+* TestLayout is a React Component that provides layout and styling information
+* for the website. The connected css file, TestLayout.css, will adjust the
+* style of web pages in TestLayout. TestLayout's styles only affect overall
+* layout style (or overrides styles), while general element styles (such as
+* styles for buttons, header text, icons, etc.) are determined by the
+* semantic-ui.css file.
+*/
 class TestLayout extends Component {
   render() {
     console.log('props', this.props);
-    return (
-      <div id="test-layout">
-        <Header />
-        <div className="content-container">
-          {this.props.routes.map((route, index) => (
-            <Route key={index} {...route} />
-          ))}
-        </div>
-      </div>
-    );
+    return [
+      <Nav key="nav" />,
+      <div key="content">
+        {this.props.routes.map((route, index) => (
+          <Route key={index} {...route} />
+        ))}
+      </div>,
+      <Footer key="footer" />
+    ];
   }
 }
 

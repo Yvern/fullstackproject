@@ -73,7 +73,7 @@ class EventDetails extends Component {
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column width={3}>
-            <Link to="/events">
+            <Link to="/dashboard">
               <Button color="blue" icon labelPosition="left">
                 <Icon name="left arrow" />Back
               </Button>

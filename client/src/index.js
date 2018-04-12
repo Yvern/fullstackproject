@@ -5,10 +5,10 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 
-//import 'materialize-css/dist/css/materialize.min.css';
 import 'babel-polyfill';
-import 'semantic-ui-css/semantic.min.css';
-import './react-datetime.css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import './css/react-datetime.css';
 
 import App from './components/App';
 import reducers from './reducers';
@@ -16,12 +16,19 @@ import reducers from './reducers';
 import axios from 'axios';
 window.axios = axios;
 
+/*
+* Create the redux store that contains the state tree for the UI, managing
+* state that may be used by multiple components in the website
+*/
 const store = createStore(
   reducers,
   {},
   applyMiddleware(reduxThunk, reduxLogger)
 );
 
+/*
+* Load the App component into the 'root' div in the index.html file
+*/
 ReactDOM.render(
   <Provider store={store}>
     <App />

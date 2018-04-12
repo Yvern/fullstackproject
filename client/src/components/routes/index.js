@@ -1,4 +1,4 @@
-import Landing from '../Landing';
+import Landing from './Landing/Landing';
 import Dashboard from './Dashboard/Dashboard';
 import EventCreate from '../Forms/EventForm/EventCreate';
 import EventDetail from './Events/EventDetail';
@@ -16,15 +16,8 @@ const routes = [
   {
     name: 'Dashboard',
     component: Dashboard,
-    menu: false,
-    path: '/dashboard',
-    exact: true
-  },
-  {
-    name: 'Events',
-    component: Dashboard,
     menu: true,
-    path: '/events',
+    path: '/dashboard',
     exact: true
   },
   {

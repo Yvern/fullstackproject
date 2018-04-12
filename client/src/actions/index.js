@@ -68,7 +68,7 @@ export const addEventRecipient = (event, recipient) => async dispatch => {
 
 export const submitSquad = (values, history) => async dispatch => {
   const res = await axios.post('/api/squads', values);
-  history.push('/events');
+  history.push('/dashboard');
   dispatch({ type: FETCH_SQUAD, payload: res.data });
 };
 

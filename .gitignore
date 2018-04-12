@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 node_modules
 dev.js
 .idea
@@ -24,4 +23,3 @@ dev.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
->>>>>>> 3f2a52fb152da6591704a80b4365656e17c21d93

@@ -1,11 +1,8 @@
-/* Custom Stylesheet */
 /**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
+ * This file overrides styles specified in the MaterializeCSS stylesheet.
  */
 
+/********* NAVIGATION *********/
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -25,6 +22,7 @@ p {
   color: #0091ea;
 }
 
+/********* LANDING PAGE *********/
 .parallax-container {
   min-height: 380px;
   line-height: 0;
@@ -58,6 +56,52 @@ p {
   font-size: inherit;
 }
 
+/********* EVENTFEED *********/
+.event-card-image {
+  min-width: 5em;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.event-card-calendar-wrapper {
+  width: 4em;
+  height: 5em;
+  margin: auto;
+  padding: 20px auto;
+  border-radius: 3px;
+}
+
+.event-card-calendar-title {
+  width: 100%;
+  background-color: #0091ea;
+  text-align: center;
+  color: white;
+  border-radius: 3px 3px 0 0;
+  border: 1px solid #0277bd;
+}
+
+.event-card-calendar-title p {
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.event-card-calendar-text {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  border-radius: 0 0 3px 3px;
+  border-bottom: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}
+
+.event-card-calendar-text h4 {
+  margin: 0;
+  padding: 1em auto;
+}
+
+/********* FOOTER *********/
 footer.page-footer {
   margin: 0;
 }

@@ -66,9 +66,9 @@ const SquadCard = ({ squad, events }) => {
           </a>
         </div>
         <div className="card-reveal">
-          <span class="card-title grey-text text-darken-4">
+          <span className="card-title grey-text text-darken-4">
             {squad.name}
-            <i class="material-icons right">close</i>
+            <i className="material-icons right">close</i>
           </span>
           <p>
             Here is some more information about this product that is only

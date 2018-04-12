@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import M from 'materialize-css';
+
+import SquadFeed from './SquadFeed';
+import EventFeed from './EventFeed';
+import UserFeed from './UserFeed';
 
 /*
 * A React component that manages the display of the Dashboard page, including
@@ -12,6 +17,11 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    //initialise materializeCSS javascript functionality
+    var elem = document.querySelectorAll('.tabs');
+    var instance = M.Tabs.init(elem, {});
+
+    //start fetching Events and Squads from the database
     this.props.fetchEventsForUser();
     this.props.fetchSquadsForUser();
   }
@@ -29,26 +39,12 @@ class Dashboard extends Component {
             </li>
           </ul>
         </div>
+        <TextContainer color="grey darken-4">
+          <UserFeed user={this.props.auth} />
+        </TextContainer>
         <TextContainer>
           <div className="row">
-            <div className="col s12 m6">
-              <div className="card z-depth-0">
-                <div className="card-content">
-                  <h5>{this.props.auth ? this.props.auth.name : ''}</h5>
-                  <p>{this.props.auth ? this.props.auth.email : ''}</p>
-                </div>
-                <div className="card-action">An action</div>
-              </div>
-            </div>
-            <div className="col s12 m6">
-              <div className="card z-depth-0">
-                <div className="card-content">
-                  <h5>{this.props.auth ? this.props.auth.name : ''}</h5>
-                  <p>{this.props.auth ? this.props.auth.email : ''}</p>
-                </div>
-                <div className="card-action">An action</div>
-              </div>
-            </div>
+            <SquadFeed squads={this.props.squads} />
           </div>
           <div className="row">
             <EventFeed events={this.props.events} />
@@ -59,47 +55,18 @@ class Dashboard extends Component {
   }
 }
 
-/*
-* A stateless functional component to render a given list of events
-*/
-const EventFeed = ({ events }) => {
-  function renderEvents() {
-    return events.map(event => {
-      return <EventCard event={event} />;
-    });
-  }
-
-  return (
-    <div>
-      <h2>Events</h2>
-      {renderEvents()}
-    </div>
-  );
-};
-
-const EventCard = ({ event }) => {
-  return (
-    <div className="card sticky-action small">
-      <div className="card-content">
-        <p>{event.title}</p>
-      </div>
-      <div className="card-action">
-        <a href="#">Link</a>
-      </div>
-      <div className="card-reveal" />
-    </div>
-  );
-};
-
 /**
  * Container to display text on the Landing page, allows for children to be
  * passed to display the child elements within the content container
  */
 const TextContainer = props => {
+  let colour = props.color ? props.color : 'white';
   return (
-    <div className="container">
-      <div className="section">
-        <div className="row">{props.children}</div>
+    <div className={colour}>
+      <div className="container">
+        <div className="section">
+          <div className="row">{props.children}</div>
+        </div>
       </div>
     </div>
   );

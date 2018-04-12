@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import M from 'materialize-css';
-
-var elem = document.querySelectorAll('.sidenav');
-var instance = new M.Sidenav.init(elem, {});
 
 class Nav extends Component {
   state = { activeItem: 'home' };
+
+  componentDidMount() {
+    //initialise materializeCSS Sidenav component
+    var elem = document.querySelectorAll('.sidenav');
+    var instance = M.Sidenav.init(elem, {});
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 

@@ -1,8 +1,8 @@
 import Landing from './Landing/Landing';
 import Dashboard from './Dashboard/Dashboard';
-import EventCreate from '../Forms/EventForm/EventCreate';
+import EventCreate from './EventCreate/EventCreate';
 import EventDetail from './Events/EventDetail';
-import EventDetails from './Events/EventDetails';
+import EventDetails from './EventDetails/EventDetails';
 import SquadCreate from '../Forms/SquadForm/SquadCreate';
 
 const routes = [

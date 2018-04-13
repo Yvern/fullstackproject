@@ -1,21 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /*
 * A stateless functional component that renders a list of squads onto the page
 */
 const SquadFeed = ({ squads }) => {
+  //Renders individual Squads for each Squad in the list
   function renderSquads() {
     return squads.map(squad => {
-      return <SquadCard squad={squad} />;
+      return <SquadCard squad={squad} key={squad._id} />;
     });
   }
 
   return (
     <div id="squadfeed">
       <h3 className="grey-text text-darken-4">
-        Squads<button className="btn right light-blue waves-effect waves-light">
+        Squads<Link
+          to="/squads/new"
+          className="btn right light-blue waves-effect waves-light"
+        >
           New Squad<i className="material-icons right">add</i>
-        </button>
+        </Link>
       </h3>
       {renderSquads()}
     </div>
@@ -60,8 +65,8 @@ const SquadCard = ({ squad, events }) => {
             ''
           )}
         </div>
-        <div className="card-action">
-          <a href="#">
+        <div className="card-action grey lighten-4">
+          <a href="#" className="blue-text">
             Go to Details<i className="material-icons right">arrow_forward</i>
           </a>
         </div>

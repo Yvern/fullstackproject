@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import M from 'materialize-css';
 
+import TextContainer from '../../General/TextContainer';
 import SquadFeed from './SquadFeed';
 import EventFeed from './EventFeed';
 import UserFeed from './UserFeed';
@@ -18,8 +19,11 @@ class Dashboard extends Component {
 
   componentDidMount() {
     //initialise materializeCSS javascript functionality
-    var elem = document.querySelectorAll('.tabs');
-    var instance = M.Tabs.init(elem, {});
+    var tabs = document.querySelectorAll('.tabs');
+    var instance = M.Tabs.init(tabs, {});
+
+    var pushpin = document.querySelectorAll('.target');
+    var instance = M.Pushpin.init(pushpin, {});
 
     //start fetching Events and Squads from the database
     this.props.fetchEventsForUser();
@@ -29,19 +33,19 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <div className="nav-content grey darken-4 center">
-          <ul className="tabs tabs-transparent">
-            <li className="tab">
-              <a href="#test1">Go to Events</a>
-            </li>
-            <li className="tab">
-              <a href="#test2">Go to Squads</a>
-            </li>
-          </ul>
-        </div>
         <TextContainer color="grey darken-4">
           <UserFeed user={this.props.auth} />
         </TextContainer>
+        <div className="nav-content grey darken-4 center">
+          <ul className="tabs tabs-transparent">
+            <li className="tab">
+              <a href="#squadfeed">Go to Squads</a>
+            </li>
+            <li className="tab">
+              <a href="#eventfeed">Go to Events</a>
+            </li>
+          </ul>
+        </div>
         <TextContainer>
           <div className="row">
             <SquadFeed squads={this.props.squads} />
@@ -54,23 +58,6 @@ class Dashboard extends Component {
     );
   }
 }
-
-/**
- * Container to display text on the Landing page, allows for children to be
- * passed to display the child elements within the content container
- */
-const TextContainer = props => {
-  let colour = props.color ? props.color : 'white';
-  return (
-    <div className={colour}>
-      <div className="container">
-        <div className="section">
-          <div className="row">{props.children}</div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 /**
  * Contains images to display in between content sections with optional

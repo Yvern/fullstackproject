@@ -1,7 +1,7 @@
 import Landing from './Landing/Landing';
 import Dashboard from './Dashboard/Dashboard';
 import EventCreate from './EventCreate/EventCreate';
-import EventDetail from './Events/EventDetail';
+import EventResponse from './EventResponse/EventResponse';
 import EventDetails from './EventDetails/EventDetails';
 import SquadCreate from '../Forms/SquadForm/SquadCreate';
 
@@ -29,7 +29,7 @@ const routes = [
   },
   {
     name: 'Event Response',
-    component: EventDetail,
+    component: EventResponse,
     menu: false,
     path: '/events/response',
     exact: false

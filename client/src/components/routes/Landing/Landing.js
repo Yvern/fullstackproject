@@ -101,8 +101,8 @@ const Banner = () => {
       </div>
       <div className="parallax grey darken-4">
         <img
-          src={window.location.origin + '/images/background1.jpg'}
-          alt="Unsplashed background img 1"
+          src={window.location.origin + '/images/background1-football.jpg'}
+          alt="Background img 1"
         />
       </div>
     </div>

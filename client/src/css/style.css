@@ -24,9 +24,29 @@ p {
 
 /********* GENERAL *********/
 
-.table-compact tr td {
-  margin: 0;
+.fluid {
+  width: 100%;
+}
+
+.compact {
   padding: 0;
+  margin: 0;
+}
+
+.table-compact td {
+  padding: 0.3em 1em;
+}
+
+.table-compact th {
+  padding: 0.9em;
+}
+
+.inline-icon {
+  padding: -1em;
+}
+
+.text-heavier {
+  font-weight: 600;
 }
 
 /********* LANDING PAGE *********/
@@ -122,13 +142,44 @@ p {
   margin: 0;
 }
 
+.event-info-table-wrapper h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+.event-info-notification-settings {
+  padding: 0.8em 0.5em;
+}
+
 .participant-table-wrapper {
   position: relative;
   height: 100%;
 }
 
 .participant-table-wrapper table {
-  margin: auto 0;
+  border: 1px solid lightgrey;
+}
+
+.participant-table-wrapper h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+.participant-buttons button {
+  margin-top: 0.99em;
+}
+
+@media only screen and (max-width: 450px) {
+  .participant-buttons button {
+    width: 100%;
+  }
+}
+
+.add-participant-wrapper {
+  height: 100%;
+  width: 100%;
 }
 
 /********* FOOTER *********/

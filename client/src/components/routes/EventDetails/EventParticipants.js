@@ -1,10 +1,27 @@
-import React from 'react';
-import { Table, Icon, Header } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions';
+import AddParticipant from './AddParticipant';
 
-const EventParticipants = ({ event }) => {
-  function countResponses() {
+class EventParticipants extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showAddParticipant: false };
+    this.showAddParticipant = this.showAddParticipant.bind(this);
+    this.hideAddParticipant = this.hideAddParticipant.bind(this);
+  }
+
+  showAddParticipant() {
+    this.setState({ showAddParticipant: true });
+  }
+
+  hideAddParticipant() {
+    this.setState({ showAddParticipant: false });
+  }
+
+  countResponses() {
     var count = 0;
-    event.recipients.forEach(recip => {
+    this.props.event.recipients.forEach(recip => {
       if (recip.attending) {
         count++;
       }
@@ -12,85 +29,118 @@ const EventParticipants = ({ event }) => {
     return count;
   }
 
-  let numOfConfirmations = countResponses();
-  let listItems = event.recipients.map(recip => {
-    let invited = recip.invited ? (
-      <Icon name="checkmark" color="green" />
-    ) : (
-      <Icon name="x" color="red" />
-    );
-    let response = <Icon name="help" color="grey" />;
-    let responseText = 'Not responded';
-    if (recip.responded) {
-      response = recip.attending ? (
-        <Icon name="checkmark" color="green" />
+  render() {
+    let numOfConfirmations = this.countResponses();
+    let listItems = this.props.event.recipients.map(recip => {
+      let invited = recip.invited ? (
+        <i className="material-icons green-text">check</i>
       ) : (
-        <Icon name="cancel" color="red" />
+        <i className="material-icons red-text">clear</i>
       );
-      responseText = recip.attending ? 'Attending' : 'Cancelled';
-    }
+      let response = (
+        <i className="material-icons grey-text inline-icon">help_outline</i>
+      );
+      let responseText = 'Not responded';
+      if (recip.responded) {
+        response = recip.attending ? (
+          <i className="material-icons green-text inline-icon">check</i>
+        ) : (
+          <i className="material-icons red-text inline-icon">clear</i>
+        );
+        responseText = recip.attending ? 'Attending' : 'Cancelled';
+      }
+
+      return (
+        <tr>
+          <td>
+            <h6>{recip.name || 'Guest'}</h6>
+            {recip.email}
+          </td>
+          <td>{invited}</td>
+          <td>
+            {response}
+            {responseText}
+          </td>
+        </tr>
+      );
+    });
 
     return (
-      <Table.Row>
-        <Table.Cell floated="left">
-          <Header as="h6">
-            <Header.Content>
-              {recip.name || 'Guest'}
-              <Header.Subheader>{recip.email}</Header.Subheader>
-            </Header.Content>
-          </Header>
-        </Table.Cell>
-        <Table.Cell>{invited}</Table.Cell>
-        <Table.Cell floated="right">
-          {response}
-          {responseText}
-        </Table.Cell>
-      </Table.Row>
-    );
-  });
+      <div className="participant-table-wrapper">
+        <table className="row table-compact z-depth-1">
+          <thead className="grey lighten-4">
+            <tr>
+              <th>
+                <h6>Participant</h6>
+              </th>
+              <th>
+                <h6>Invited</h6>
+              </th>
+              <th>
+                <h6>Response</h6>
+              </th>
+            </tr>
+          </thead>
 
-  return (
-    <div className="participant-table-wrapper">
-      <table className="table-compact">
-        <thead className="grey lighten-4">
-          <tr>
-            <th>Participant</th>
-            <th>Invited</th>
-            <th>Response</th>
-          </tr>
-        </thead>
+          <tbody>{listItems}</tbody>
 
-        <Table.Body>
-          {listItems}
-          <Table.Row>
-            <Table.Cell />
-            <Table.Cell />
-            <Table.Cell />
-          </Table.Row>
-        </Table.Body>
-
-        <Table.Footer>
-          <Table.Row
-            positive={numOfConfirmations >= event.minimumParticipants}
-            negative={numOfConfirmations < event.minimumParticipants}
+          <tfoot>
+            <tr
+              positive={
+                numOfConfirmations >= this.props.event.minimumParticipants
+              }
+              negative={
+                numOfConfirmations < this.props.event.minimumParticipants
+              }
+            >
+              <th>
+                <h6>Total attending:</h6>
+              </th>
+              <th />
+              <th>
+                <h6>
+                  {numOfConfirmations}{' '}
+                  {this.props.event.minimumParticipants > 0
+                    ? '/' + this.props.event.minimumParticipants
+                    : ''}
+                </h6>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+        <div className="row participant-add-fields z-depth-1 fluid">
+          {this.state.showAddParticipant ? (
+            <AddParticipant
+              event={this.props.event}
+              onCancel={this.hideAddParticipant}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+        <div className="row participant-buttons">
+          <button
+            onClick={this.showAddParticipant}
+            className="btn light-blue white-text waves-effect light-waves left"
           >
-            <Table.Cell>
-              <Header as="h6">Total attending:</Header>
-            </Table.Cell>
-            <Table.Cell />
-            <Table.Cell>
-              <Header as="h6">
-                {numOfConfirmations}{' '}
-                {event.minimumParticipants > 0
-                  ? '/' + event.minimumParticipants
-                  : ''}
-              </Header>
-            </Table.Cell>
-          </Table.Row>
-        </Table.Footer>
-      </table>
-    </div>
-  );
-};
+            Add Someone <i className="material-icons right white-text">add</i>
+          </button>
+          <button
+            onClick={() => this.props.sendMail(this.props.event)}
+            className="btn green white-text waves-effect light-waves right"
+          >
+            Send Invites <i className="material-icons right white-text">send</i>
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
 
-export default EventParticipants;
+function mapStateToProps(state) {
+  return {
+    event: state.eventResponse.event
+  };
+}
+
+export default connect(mapStateToProps, actions)(EventParticipants);

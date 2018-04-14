@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
 import M from 'materialize-css';
+import moment from 'moment';
 
 import BreadCrumbs from '../../General/BreadCrumbs';
 import TextContainer from '../../General/TextContainer';
 import EventParticipants from './EventParticipants';
+import EventInfoBasic from './EventInfoBasic';
 
 class EventDetails extends Component {
   state = { editing: false };
@@ -39,10 +41,10 @@ class EventDetails extends Component {
         );
       default:
         return [
-          <div key="info" className="col s12 m6">
+          <div key="info" className="col s12 xl6">
             <EventInfo event={this.props.event.event} />
           </div>,
-          <div key="participants" className="col s12 m6">
+          <div key="participants" className="col s12 xl6">
             <EventParticipants event={this.props.event.event} />
           </div>
         ];
@@ -87,36 +89,20 @@ class EventDetails extends Component {
 }
 
 const EventInfo = ({ event }) => {
-  console.log('event', event);
-  return [
-    <table>
-      <tbody>
-        <tr>
-          <th className="grey-text text-darken-3">
-            <i className="material-icons">insert_invitation</i> Date
-          </th>
-          <td>Date here</td>
-        </tr>
-        <tr>
-          <th className="grey-text text-darken-3">
-            <i className="material-icons">group</i> Minimum
-          </th>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th className="grey-text text-darken-3">
-            <i className="material-icons">location_on</i> Location
-          </th>
-          <td>Location here</td>
-        </tr>
-      </tbody>
-    </table>,
-    <div>
-      <h6 className="grey-text text-darken-3">
-        <i className="material-icons">notifications</i>Notifications
-      </h6>
+  return (
+    <div className="row event-info-table-wrapper">
+      <div className="col s12 m6 xl12">
+        <EventInfoBasic event={event} />
+      </div>
+      <div className="col s12 m6 xl12">
+        <div className="event-info-notification-settings">
+          <h6 className="grey-text text-darken-3">
+            <i className="material-icons">notifications</i>Notification Settings
+          </h6>
+        </div>
+      </div>
     </div>
-  ];
+  );
 };
 
 function mapStateToProps(state) {

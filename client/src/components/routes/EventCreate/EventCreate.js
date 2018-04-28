@@ -14,7 +14,7 @@ class EventCreate extends Component {
     return (
       <div>
         <BreadCrumbs crumbPages={crumbPages} />
-        <p>Create new event</p>
+        <EventForm />
       </div>
     );
   }

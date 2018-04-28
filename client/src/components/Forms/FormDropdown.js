@@ -1,42 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import M from 'materialize-css';
 
-import { Form, Field, Dropdown, Message, Text, Icon } from 'semantic-ui-react';
+class DropDown extends Component {
+  componentDidMount() {
+    var elem = document.querySelectorAll('select');
+    var instance = M.FormSelect.init(elem, {});
+    console.log(instance);
+  }
 
-export default ({
-  input,
-  label,
-  options,
-  placeholder,
-  meta: { error, touched }
-}) => {
-  return (
-    <div>
-      <Form.Select
-        name="squad"
-        value={input.value}
-        onChange={(e, { value }) => input.onChange(value)}
-        label={label}
-        icon={
-          input.value ? (
-            <Icon
-              link
-              onClick={() => input.onChange(null)}
-              name="x"
-              color="red"
-            />
-          ) : (
-            'dropdown'
-          )
-        }
-        options={options}
-        placeholder={placeholder}
-        error={touched && error}
-        fluid={true}
-        selection={true}
-      />
-      <div className="form-error-text" style={{ marginBottom: '20px' }}>
-        {touched && error}
+  render() {
+    //initialise options
+    const opts = [<option value="">{this.props.placeholder}</option>];
+    this.props.options.forEach(function(e, i) {
+      opts.push(<option value={e.value}>{e.text}</option>);
+    });
+
+    return (
+      <div className="input-field select">
+        <select {...this.props.input} className="select">
+          {opts}
+        </select>
+        <label>{this.props.label}</label>
+        <span className="helper-text" data-error="wrong" data-success="right">
+          {this.props.meta
+            ? this.props.meta.touched && this.props.meta.error
+            : ''}
+        </span>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
+export default DropDown;

@@ -7,7 +7,7 @@ const BreadCrumbs = ({ crumbPages }) => {
   function renderCrumbs() {
     return crumbPages.map(page => {
       return (
-        <Link to={page.link} className="breadcrumb">
+        <Link to={page.link} key={page.name} className="breadcrumb">
           {page.name}
         </Link>
       );

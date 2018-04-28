@@ -85,14 +85,7 @@ class EventParticipants extends Component {
           <tbody>{listItems}</tbody>
 
           <tfoot>
-            <tr
-              positive={
-                numOfConfirmations >= this.props.event.minimumParticipants
-              }
-              negative={
-                numOfConfirmations < this.props.event.minimumParticipants
-              }
-            >
+            <tr>
               <th>
                 <h6>Total attending:</h6>
               </th>

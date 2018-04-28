@@ -34,7 +34,7 @@ class Dashboard extends Component {
     return (
       <div>
         <TextContainer color="grey darken-4">
-          <UserFeed user={this.props.auth} />
+          <UserFeed user={this.props.auth} events={this.props.events} />
         </TextContainer>
         <div className="nav-content grey darken-4 center">
           <ul className="tabs tabs-transparent">

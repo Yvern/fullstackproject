@@ -35,6 +35,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//bind routes to app
 authRoutes(app);
 billingRoutes(app);
 eventRoutes(app);
@@ -51,22 +52,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
-/*
- * Express app to register a new route handler (app.get())
- * Get: attempting to get information
- * Post: send info to server
- * '/' route to handle (home), executes code inside {}
- * req: represents incoming request
- * res: represents outgoing response
- *
- * App.get(arg1, arg2):
- * arg1: route
- * arg2: callback function to run when the route is accessed
- */
-//app.get('/', (req, res) => {
-//  res.send({ hi: 'world' });
-//});
 
 /*
  * Allows Heroku to inject environment variable PORT for dynamic PORT binding

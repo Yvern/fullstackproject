@@ -2,17 +2,32 @@ import React, { Component } from 'react';
 import Datetime from 'react-datetime';
 import { Form, Input } from 'semantic-ui-react';
 
-const DatePicker = ({ input, label, meta: { error, touched } }) => {
+const DatePicker = ({
+  input,
+  label,
+  meta: { error, touched },
+  disabled = false
+}) => {
   function renderInput(props, openCalendar, closeCalendar) {
     function clear() {
       props.onChange({ target: { value: '' } });
     }
     return (
-      <div>
-        <Form.Field label={label} control={Input} {...props} />
-        <div className="form-error-text" style={{ marginBottom: '20px' }}>
-          {touched && error}
-        </div>
+      <div className="input-field">
+        <input
+          disabled={disabled}
+          {...input}
+          {...props}
+          type="text"
+          id={input.name}
+          className={touched ? (error ? 'invalid' : 'valid') : 'validate'}
+        />
+        <label htmlFor={input.name}>{label}</label>
+        <span
+          className="helper-text"
+          data-error={error}
+          data-success="Looks good!"
+        />
       </div>
     );
   }

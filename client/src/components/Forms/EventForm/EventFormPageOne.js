@@ -5,22 +5,40 @@ import FormDropdown from '../FormDropdown';
 import { Link } from 'react-router-dom';
 import validateEmails from '../../../utils/validateEmail';
 import formFields from './formFields';
-import {
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Label,
-  Message,
-  Segment,
-  Header,
-  Icon,
-  Divider,
-  Dropdown
-} from 'semantic-ui-react';
 import Datetime from '../../DateTimePicker';
+import moment from 'moment';
+import M from 'materialize-css';
+
+import { connect } from 'react-redux';
+import { change } from 'redux-form';
 
 class EventForm extends Component {
+  constructor(props) {
+    super(props);
+    this.onEventFormSubmit = this.onEventFormSubmit.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
+  }
+
+  componentDidMount() {
+    M.updateTextFields();
+  }
+
+  onEventFormSubmit() {
+    this.props.onEventFormSubmit();
+  }
+
+  onDateChange(e, date) {
+    let currentDate = new Date();
+    let reminderDate = moment(date).subtract(3, 'days');
+    reminderDate = reminderDate > currentDate ? reminderDate : date;
+    let confirmationDate = moment(date).subtract(1, 'days');
+    confirmationDate = confirmationDate > currentDate ? confirmationDate : date;
+
+    this.props.change('date', date);
+    this.props.change('reminderattendancedate', reminderDate);
+    this.props.change('reminderconfirmationdate', confirmationDate);
+  }
+
   renderFields() {
     return formFields.map(({ name, label, type, page }) => {
       if (page === 1) {
@@ -43,7 +61,13 @@ class EventForm extends Component {
 
         if (type === 'date') {
           return (
-            <Field key={name} name={name} label={label} component={Datetime} />
+            <Field
+              key={name}
+              name={name}
+              label={label}
+              onChange={this.onDateChange}
+              component={Datetime}
+            />
           );
         }
 
@@ -72,24 +96,21 @@ class EventForm extends Component {
   }
 
   render() {
+    let options = this.props.squads.map(squad => ({
+      text: squad.name,
+      value: squad._id
+    }));
     return (
       <div>
-        <Form onSubmit={this.props.handleSubmit(this.props.onEventFormSubmit)}>
+        <form onSubmit={this.props.handleSubmit(this.onEventFormSubmit)}>
           {this.renderFields()}
-          <Divider />
-          <Link to="/events">
-            <Button>Cancel</Button>
+          <Link to="/dashboard#eventfeed" className="btn red">
+            Cancel
           </Link>
-          <Button
-            floated="right"
-            color="blue"
-            type="submit"
-            icon
-            labelPosition="right"
-          >
-            Next<Icon name="right arrow" />
-          </Button>
-        </Form>
+          <button type="submit" className="btn blue white-text right">
+            <i className="material-icons right">arrow_forward</i>Next
+          </button>
+        </form>
       </div>
     );
   }
@@ -112,8 +133,17 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+EventForm = reduxForm({
   validate,
   form: 'eventForm',
   destroyOnUnmount: false
 })(EventForm);
+
+function mapStateToProps(state) {
+  return {
+    formValues: state.form.eventForm.values,
+    formFields: state.form.eventForm.fields
+  };
+}
+
+export default connect(mapStateToProps, change)(EventForm);

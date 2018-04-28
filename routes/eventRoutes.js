@@ -72,7 +72,9 @@ module.exports = app => {
       date,
       minimum,
       reminderattendance,
+      reminderattendancedate,
       reminderconfirmation,
+      reminderconfirmationdate,
       recipients
     } = req.body;
 
@@ -88,11 +90,11 @@ module.exports = app => {
         minimumParticipants: minimum,
         attendanceReminder: {
           subscribed: reminderattendance,
-          sendDate: new Date('March 7, 2018 17:30:00')
+          sendDate: reminderattendancedate
         },
         confirmationReminder: {
           subscribed: reminderconfirmation,
-          sendDate: new Date('March 7, 2018 17:30:00')
+          sendDate: reminderconfirmationdate
         }
       };
 

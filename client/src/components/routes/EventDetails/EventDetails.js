@@ -9,6 +9,7 @@ import BreadCrumbs from '../../General/BreadCrumbs';
 import TextContainer from '../../General/TextContainer';
 import EventParticipants from './EventParticipants';
 import EventInfoBasic from './EventInfoBasic';
+import EventInfoNotifications from './EventInfoNotifications';
 
 class EventDetails extends Component {
   state = { editing: false };
@@ -95,11 +96,7 @@ const EventInfo = ({ event }) => {
         <EventInfoBasic event={event} />
       </div>
       <div className="col s12 m6 xl12">
-        <div className="event-info-notification-settings">
-          <h6 className="grey-text text-darken-3">
-            <i className="material-icons">notifications</i>Notification Settings
-          </h6>
-        </div>
+        <EventInfoNotifications event={event} />
       </div>
     </div>
   );

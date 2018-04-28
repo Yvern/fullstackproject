@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import EventFormPageOne from './EventFormPageOne';
 import EventFormPageTwo from './EventFormPageTwo';
-import { Message, Header, Segment, Icon } from 'semantic-ui-react';
 import * as actions from '../../../actions';
 
 class EventCreate extends Component {
@@ -46,18 +45,12 @@ class EventCreate extends Component {
 
   render() {
     return (
-      <div className="create-event-form-container">
-        <Message attached style={{ height: '4em' }}>
-          <Header floated="left">
-            <Icon name="add to calendar" color="blue" />Create a New Event
-          </Header>
-          <div style={{ float: 'right' }}>
-            <Link to="/events">
-              <Icon link name="close" size="large" color="red" />
-            </Link>
-          </div>
-        </Message>
-        <Segment attached="bottom">{this.renderContent()}</Segment>
+      <div className="container">
+        <h3>
+          <i className="material-icons medium light-blue-text">event</i> Create
+          a New Event
+        </h3>
+        {this.renderContent()}
       </div>
     );
   }
@@ -74,7 +67,9 @@ function mapStateToProps(state) {
       date: new Date(),
       minimum: 0,
       reminderattendance: false,
-      reminderconfirmation: false
+      reminderattendancedate: new Date(),
+      reminderconfirmation: false,
+      reminderconfirmationdate: new Date()
     }
   };
 }

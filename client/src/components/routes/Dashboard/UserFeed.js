@@ -16,26 +16,8 @@ const UserFeed = props => {
     return pendingEvents;
   }
 
-  function renderNotifications() {
-    let notifications = [{ text: 'notif1' }];
-
-    let notificationsDisplay = notifications.map((notification, i) => {
-      return (
-        <li className="collection-item" key={i}>
-          {notification.text}
-        </li>
-      );
-    });
-
-    if (notificationsDisplay.length < 1) {
-      return <li className="collection-item">No notifications to show!</li>;
-    }
-
-    return notificationsDisplay;
-  }
-
   return (
-    <div className="row user-feed-content">
+    <div className="row">
       <div className="col s12 m6">
         <div className="card z-depth-0 user-feed-info-content">
           <div className="card-content">
@@ -53,24 +35,48 @@ const UserFeed = props => {
         </div>
       </div>
       <div className="col s12 m6">
-        <ul className="collection with-header user-feed-notifications-content">
-          <li className="collection-header">
-            <h5>
-              <i className="material-icons">notifications</i>Notifications
-            </h5>
-          </li>
-          <div className="user-feed-notifications-wrapper">
-            <div className="user-feed-notifications">
-              {renderNotifications()}
-              <li className="collection-item blue-text grey lighten-4 center-align">
-                <p className="compact">Load older notifications</p>
-                <i className="material-icons blue-text">expand_more</i>
-              </li>
-            </div>
-          </div>
-        </ul>
+        <Notifications user={props.user} />
       </div>
     </div>
+  );
+};
+
+const Notifications = props => {
+  function renderNotifications() {
+    let notifications = [];
+
+    let notificationsDisplay = notifications.map((notification, i) => {
+      return (
+        <li className="collection-item" key={i}>
+          {notification.text}
+        </li>
+      );
+    });
+
+    if (notificationsDisplay.length < 1) {
+      return <li className="collection-item">No notifications to show!</li>;
+    } else {
+      notificationsDisplay.push(
+        <li className="collection-item blue-text grey lighten-4 center-align">
+          <p className="compact">Load older notifications</p>
+          <i className="material-icons blue-text">expand_more</i>
+        </li>
+      );
+    }
+
+    return notificationsDisplay;
+  }
+  return (
+    <ul className="collection with-header user-feed-notifications-content">
+      <li className="collection-header">
+        <h5>
+          <i className="material-icons">notifications</i>Notifications
+        </h5>
+      </li>
+      <div className="user-feed-notifications-wrapper">
+        <div className="user-feed-notifications">{renderNotifications()}</div>
+      </div>
+    </ul>
   );
 };
 

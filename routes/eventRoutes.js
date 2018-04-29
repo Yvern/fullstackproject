@@ -20,7 +20,6 @@ module.exports = app => {
   app.get('/api/events/event', async (req, res) => {
     let event = await Event.findById(req.query.event);
     res.send({ event: event, recipient: req.query.recipient });
-    //res.redirect('/events/event');
   });
 
   app.post('/api/events/webhooks', (req, res) => {

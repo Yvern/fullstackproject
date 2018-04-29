@@ -38,6 +38,9 @@ const SquadCard = ({ squad, events }) => {
       return event.eventDate > new Date();
     });
   }
+
+  let queryURL = 'squads/details/?squad=' + squad._id;
+
   return (
     <div className="col s12 m4 xl3">
       <div className="card sticky-action small">
@@ -66,9 +69,9 @@ const SquadCard = ({ squad, events }) => {
           )}
         </div>
         <div className="card-action grey lighten-4">
-          <a href="#" className="blue-text">
+          <Link to={queryURL} className="blue-text">
             Go to Details<i className="material-icons right">arrow_forward</i>
-          </a>
+          </Link>
         </div>
         <div className="card-reveal">
           <span className="card-title grey-text text-darken-4">

@@ -4,7 +4,9 @@ import {
   FETCH_EVENT,
   FETCH_EVENTS,
   FETCH_SQUAD,
-  FETCH_SQUADS
+  FETCH_SQUADS,
+  CLEAR_EVENT,
+  CLEAR_SQUAD
 } from './types';
 
 /******** USER ACTIONS ********/
@@ -36,8 +38,7 @@ export const fetchEventsForUser = () => async dispatch => {
 //Clears current event data when leaving the page
 export const clearEvent = () => {
   return {
-    type: FETCH_EVENT,
-    payload: { event: null }
+    type: CLEAR_EVENT
   };
 };
 
@@ -81,6 +82,22 @@ export const fetchSquad = query => async dispatch => {
 export const fetchSquadsForUser = () => async dispatch => {
   const res = await axios.get('/api/squads');
   dispatch({ type: FETCH_SQUADS, payload: res.data });
+};
+
+//Clears current squad data when leaving the page
+export const clearSquad = () => {
+  return {
+    type: CLEAR_SQUAD
+  };
+};
+
+/******** SQUAD EDIT ACTIONS ********/
+export const addSquadMember = (squad, member) => async dispatch => {
+  const res = await axios.post('/api/squads/addmember', {
+    squad,
+    member
+  });
+  dispatch({ type: FETCH_SQUAD, payload: res.data });
 };
 
 /******** EMAIL ACTIONS ********/

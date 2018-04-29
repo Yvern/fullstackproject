@@ -6,18 +6,6 @@ import FormTextField from '../FormTextField';
 import formFields from './formFields';
 import * as actions from '../../../actions/index';
 import validateEmails from '../../../utils/validateEmail';
-import {
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Label,
-  Message,
-  Segment,
-  Header,
-  Icon,
-  Divider
-} from 'semantic-ui-react';
 
 class SquadForm extends Component {
   constructor(props) {
@@ -56,28 +44,16 @@ class SquadForm extends Component {
   }
 
   render() {
-    console.log('squad form state:', this.state);
-    console.log('squad form props:', this.props);
     return (
-      <div>
-        <Form onSubmit={this.props.handleSubmit(this.handleSubmitSquad)}>
-          {this.renderFields()}
-          <Divider />
-          <Link to="/events">
-            <Button>Cancel</Button>
-          </Link>
-          <Button
-            floated="right"
-            icon
-            labelPosition="right"
-            type="submit"
-            className="green btn-flat right white-text"
-          >
-            Create Squad
-            <Icon name="checkmark" />
-          </Button>
-        </Form>
-      </div>
+      <form onSubmit={this.props.handleSubmit(this.handleSubmitSquad)}>
+        {this.renderFields()}
+        <Link to="/dashboard#squadfeed" className="btn red">
+          Cancel
+        </Link>
+        <button type="submit" className="btn green white-text right">
+          <i className="material-icons right">check</i>Create Squad
+        </button>
+      </form>
     );
   }
 }

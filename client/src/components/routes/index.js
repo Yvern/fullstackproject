@@ -3,7 +3,8 @@ import Dashboard from './Dashboard/Dashboard';
 import EventCreate from './EventCreate/EventCreate';
 import EventResponse from './EventResponse/EventResponse';
 import EventDetails from './EventDetails/EventDetails';
-import SquadCreate from '../Forms/SquadForm/SquadCreate';
+import SquadCreate from './SquadCreate/SquadCreate';
+import SquadDetails from './SquadDetails/SquadDetails';
 
 const routes = [
   {
@@ -46,6 +47,13 @@ const routes = [
     component: SquadCreate,
     menu: false,
     path: '/squads/new',
+    exact: false
+  },
+  {
+    name: 'Squad Details',
+    component: SquadDetails,
+    menu: false,
+    path: '/squads/details',
     exact: false
   }
 ];

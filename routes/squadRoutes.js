@@ -45,4 +45,31 @@ module.exports = app => {
       res.send(false);
     }
   });
+
+  app.get('/api/squads/squad/', async (req, res) => {
+    let squad = await Squad.findById(req.query.squad);
+    res.send(squad);
+  });
+
+  app.post('/api/squads/addmember', requireLogin, async (req, res) => {
+    console.log(req.body);
+    try {
+      let squad = await Squad.findById(req.body.squad._id);
+      let member = {
+        email: req.body.member.email.trim(),
+        name: req.body.member.name
+      };
+
+      //add new member to list
+      squad.members.push(member);
+
+      console.log(squad.members);
+
+      let savedSquad = await squad.save();
+
+      res.send(savedSquad);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
 };

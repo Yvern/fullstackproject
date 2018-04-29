@@ -17,6 +17,7 @@ class EventForm extends Component {
     super(props);
     this.onEventFormSubmit = this.onEventFormSubmit.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+    this.onSquadChange = this.onSquadChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,38 @@ class EventForm extends Component {
     this.props.change('reminderconfirmationdate', confirmationDate);
   }
 
+  onSquadChange(e, squad) {
+    let recipientList = this.squadMembersToRecipients(
+      this.loadSquadMembers(squad)
+    );
+    this.props.change('recipients', recipientList);
+  }
+
+  loadSquadMembers(squadID) {
+    //if squad has been set
+    console.log('this.props.formValues', this.props.formValues);
+    if (squadID) {
+      let squad = this.props.squads.find(squad => squadID === squad._id);
+      console.log('squad: ', squad.members);
+      return squad.members;
+    }
+
+    return [];
+  }
+
+  squadMembersToRecipients(members) {
+    let emails = '';
+    console.log('members', members);
+    members.forEach((member, i) => {
+      console.log(i, member);
+      if (i > 0) {
+        emails = emails.concat(',');
+      }
+      emails = emails.concat(member.email);
+    });
+    return emails;
+  }
+
   renderFields() {
     return formFields.map(({ name, label, type, page }) => {
       if (page === 1) {
@@ -54,6 +87,7 @@ class EventForm extends Component {
               label={label}
               options={options}
               placeholder="Select Team"
+              onChange={this.onSquadChange}
               component={FormDropdown}
             />
           );

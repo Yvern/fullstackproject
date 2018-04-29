@@ -9,12 +9,7 @@ import FormTextField from '../../Forms/FormTextField';
 class AddParticipant extends Component {
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit(values) {
-    console.log('add recipient: ', values);
-    this.props.addEventRecipient(this.props.event, values);
+    this.onSubmit = this.props.onSubmit;
   }
 
   render() {

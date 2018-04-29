@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import AddParticipant from './AddParticipant';
+import AddParticipant from '../EventDetails/AddParticipant';
 
-class EventParticipants extends Component {
+class SquadMembers extends Component {
   constructor(props) {
     super(props);
     this.state = { showAddParticipant: false };
@@ -20,49 +20,31 @@ class EventParticipants extends Component {
     this.setState({ showAddParticipant: false });
   }
 
-  countResponses() {
-    var count = 0;
-    this.props.event.recipients.forEach(recip => {
-      if (recip.attending) {
-        count++;
-      }
-    });
-    return count;
-  }
-
   onSubmit(values) {
     console.log('add recipient: ', values);
-    this.props.addEventRecipient(this.props.event, values);
+    this.props.addSquadMember(this.props.squad, values);
   }
 
   render() {
-    let numOfConfirmations = this.countResponses();
-    let listItems = this.props.event.recipients.map(recip => {
-      let invited = recip.invited ? (
-        <i className="material-icons green-text">check</i>
-      ) : (
-        <i className="material-icons red-text">clear</i>
-      );
+    let numOfConfirmations = 0;
+    let listItems = this.props.squad.members.map(member => {
       let response = (
-        <i className="material-icons grey-text inline-icon">help_outline</i>
+        <i className="material-icons grey-text inline-icon">clear</i>
       );
-      let responseText = 'Not responded';
-      if (recip.responded) {
-        response = recip.attending ? (
+      let responseText = 'Not confirmed';
+      if (member.confirmed) {
+        response = (
           <i className="material-icons green-text inline-icon">check</i>
-        ) : (
-          <i className="material-icons red-text inline-icon">clear</i>
         );
-        responseText = recip.attending ? 'Attending' : 'Cancelled';
+        responseText = 'Confirmed member';
       }
 
       return (
         <tr>
           <td>
-            <h6>{recip.name || 'Guest'}</h6>
-            {recip.email}
+            <h6>{member.name || 'Guest'}</h6>
+            {member.email}
           </td>
-          <td>{invited}</td>
           <td>
             {response}
             {responseText}
@@ -77,40 +59,19 @@ class EventParticipants extends Component {
           <thead className="grey lighten-4">
             <tr>
               <th>
-                <h6>Participant</h6>
+                <h6>Member</h6>
               </th>
               <th>
-                <h6>Invited</h6>
-              </th>
-              <th>
-                <h6>Response</h6>
+                <h6>Confirmed membership</h6>
               </th>
             </tr>
           </thead>
 
           <tbody>{listItems}</tbody>
-
-          <tfoot>
-            <tr>
-              <th>
-                <h6>Total attending:</h6>
-              </th>
-              <th />
-              <th>
-                <h6>
-                  {numOfConfirmations}{' '}
-                  {this.props.event.minimumParticipants > 0
-                    ? '/' + this.props.event.minimumParticipants
-                    : ''}
-                </h6>
-              </th>
-            </tr>
-          </tfoot>
         </table>
         <div className="row participant-add-fields z-depth-1 fluid">
           {this.state.showAddParticipant ? (
             <AddParticipant
-              event={this.props.event}
               onCancel={this.hideAddParticipant}
               onSubmit={this.onSubmit}
             />
@@ -126,7 +87,7 @@ class EventParticipants extends Component {
             Add Someone <i className="material-icons right white-text">add</i>
           </button>
           <button
-            onClick={() => this.props.sendMail(this.props.event)}
+            onClick={() => console.log('mail')}
             className="btn green white-text waves-effect light-waves right"
           >
             Send Invites <i className="material-icons right white-text">send</i>
@@ -139,8 +100,8 @@ class EventParticipants extends Component {
 
 function mapStateToProps(state) {
   return {
-    event: state.eventResponse.event
+    squad: state.squadData
   };
 }
 
-export default connect(mapStateToProps, actions)(EventParticipants);
+export default connect(mapStateToProps, actions)(SquadMembers);

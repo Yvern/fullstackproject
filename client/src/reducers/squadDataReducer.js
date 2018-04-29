@@ -6,6 +6,8 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_SQUAD:
       return action.payload || false;
+    case types.CLEAR_SQUAD:
+      return initialState;
     default:
       return state;
   }

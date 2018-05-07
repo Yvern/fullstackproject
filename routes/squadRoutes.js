@@ -6,6 +6,8 @@ const uuidv4 = require('uuid/v4');
 const mailSend = require('../services/mailSender');
 
 const Squad = mongoose.model('Squad');
+const User = mongoose.model('User');
+const Event = mongoose.model('Event');
 
 const sgMail = require('@sendgrid/mail');
 const keys = require('../config/keys');
@@ -48,7 +50,9 @@ module.exports = app => {
 
   app.get('/api/squads/squad/', async (req, res) => {
     let squad = await Squad.findById(req.query.squad);
-    res.send(squad);
+    let user = await User.findById(squad._user);
+    let events = await Event.find({ _squad: squad._id });
+    res.send({ squad, user, events });
   });
 
   app.post('/api/squads/addmember', requireLogin, async (req, res) => {
@@ -66,8 +70,9 @@ module.exports = app => {
       console.log(squad.members);
 
       let savedSquad = await squad.save();
-
-      res.send(savedSquad);
+      let user = await User.findById(savedSquad._user);
+      let events = await Event.find({ _squad: savedSquad._id });
+      res.send({ squad: savedSquad, user, events });
     } catch (err) {
       res.status(422).send(err);
     }

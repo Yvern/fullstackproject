@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
-import M from 'materialize-css';
 import moment from 'moment';
 
 import BreadCrumbs from '../../General/BreadCrumbs';
@@ -10,14 +9,12 @@ import TextContainer from '../../General/TextContainer';
 import EventParticipants from './EventParticipants';
 import EventInfoBasic from './EventInfoBasic';
 import EventInfoNotifications from './EventInfoNotifications';
+import { EventCalendar } from '../Dashboard/EventFeed';
 
 class EventDetails extends Component {
   state = { editing: false };
 
   componentDidMount() {
-    var floating = document.querySelector('.fixed-action-btn');
-    var instance = new M.FloatingActionButton(floating, {});
-
     this.props.fetchEvent(window.location.search);
   }
 
@@ -76,11 +73,11 @@ class EventDetails extends Component {
             </h4>
           </div>
           <div className="col m3">
-            <div className="fixed-action-btn">
-              <a className="btn-floating btn-large cyan pulse">
-                <i className="material-icons">edit</i>
-              </a>
-            </div>
+            {this.props.event.event ? (
+              <EventCalendar date={moment(this.props.event.event.eventDate)} />
+            ) : (
+              ''
+            )}
           </div>
         </TextContainer>
         <TextContainer>{this.renderContent()}</TextContainer>

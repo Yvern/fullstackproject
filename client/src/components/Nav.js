@@ -54,7 +54,11 @@ class Nav extends Component {
         <nav className="white" role="navigation">
           <div id="nav-colourstrip" className="teal">
             <div className="nav-wrapper container">
-              <a id="logo-container" href="#" className="brand-logo">
+              <a
+                id="logo-container"
+                href={this.props.auth ? '/dashboard' : '/'}
+                className="brand-logo"
+              >
                 SquadSquare
               </a>
               <ul className="right hide-on-med-and-down">

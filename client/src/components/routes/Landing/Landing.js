@@ -37,7 +37,7 @@ class Landing extends Component {
         </TextContainer>
 
         <ImageContainer
-          imgSrc={window.location.origin + '/images/background2.jpg'}
+          imgSrc={window.location.origin + '/images/background1-football.jpg'}
           text={'Organise your sports match.'}
         />
 
@@ -63,7 +63,7 @@ class Landing extends Component {
         </TextContainer>
 
         <ImageContainer
-          imgSrc={window.location.origin + '/images/background3.jpg'}
+          imgSrc={window.location.origin + '/images/background1-football.jpg'}
           text="Invite your friends."
         />
       </div>

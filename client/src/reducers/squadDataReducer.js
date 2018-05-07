@@ -1,11 +1,20 @@
 import * as types from '../actions/types';
 
-const initialState = null;
+const initialState = {
+  squad: null,
+  user: null,
+  events: null
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_SQUAD:
-      return action.payload || false;
+      return {
+        ...state,
+        squad: action.payload.squad || false,
+        user: action.payload.user || false,
+        events: action.payload.events || false
+      };
     case types.CLEAR_SQUAD:
       return initialState;
     default:

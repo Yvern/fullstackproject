@@ -74,22 +74,26 @@ class EventInfoNotifications extends Component {
       );
     }
 
-    return notifications.map(notification => {
-      if (notification.subscribed) {
-        return (
-          <li className="compact">
-            <div className="collapsible-header">
-              {renderNotificationHeader(notification)}
-            </div>
-            <div className="collapsible-body semi-compact-top">
-              {renderNotificationBody(notification)}
-            </div>
-          </li>
-        );
-      } else {
-        return null;
-      }
-    });
+    if (notifications.length > 0) {
+      return notifications.map(notification => {
+        if (notification.subscribed) {
+          return (
+            <li className="compact">
+              <div className="collapsible-header">
+                {renderNotificationHeader(notification)}
+              </div>
+              <div className="collapsible-body semi-compact-top">
+                {renderNotificationBody(notification)}
+              </div>
+            </li>
+          );
+        } else {
+          return null;
+        }
+      });
+    } else {
+      return <div className="grey-text">No notifications set up!</div>;
+    }
   }
 
   render() {

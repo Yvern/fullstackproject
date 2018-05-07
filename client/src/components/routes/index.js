@@ -5,6 +5,8 @@ import EventResponse from './EventResponse/EventResponse';
 import EventDetails from './EventDetails/EventDetails';
 import SquadCreate from './SquadCreate/SquadCreate';
 import SquadDetails from './SquadDetails/SquadDetails';
+import AccountSettings from './AccountSettings/AccountSettings';
+import AccountDeleteResults from './AccountSettings/AccountDeleteResults';
 
 const routes = [
   {
@@ -54,6 +56,20 @@ const routes = [
     component: SquadDetails,
     menu: false,
     path: '/squads/details',
+    exact: false
+  },
+  {
+    name: 'Account Settings',
+    component: AccountSettings,
+    menu: true,
+    path: '/settings',
+    exact: true
+  },
+  {
+    name: 'Delete Account Results',
+    component: AccountDeleteResults,
+    menu: false,
+    path: '/settings/results',
     exact: false
   }
 ];

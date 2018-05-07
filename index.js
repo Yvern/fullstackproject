@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  * Allows Heroku to inject environment variable PORT for dynamic PORT binding
  * Then listen on that PORT for requests
- * Alternatively, if no PORT if injected, use port 5000
+ * Alternatively, if no PORT is injected, use port 5000
  */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT || 5000);
+app.listen(PORT);

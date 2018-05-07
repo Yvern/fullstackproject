@@ -41,7 +41,7 @@ class EventCard extends Component {
 
   render() {
     let date = moment(this.props.event.eventDate);
-    let queryURL = 'events/details/?event=' + this.props.event._id;
+    let queryURL = '/events/details/?event=' + this.props.event._id;
 
     return (
       <div className="col s12 l6 xl4">
@@ -74,7 +74,7 @@ class EventCard extends Component {
 * Stateless functional component that handles the display of the date for the
 * event.
 */
-const EventCalendar = ({ date }) => {
+export const EventCalendar = ({ date }) => {
   return (
     <div className="right">
       <div className="event-card-calendar-wrapper">
@@ -93,7 +93,7 @@ const EventCalendar = ({ date }) => {
 * Stateless functional component that handles the display of information
 * about attendance to the event.
 */
-const AttendanceInformation = ({ event }) => {
+export const AttendanceInformation = ({ event }) => {
   let confirmations = calculateConfirmations(event);
   let totalInvited = event.recipients.length;
   let minimumParticipants = event.minimumParticipants;

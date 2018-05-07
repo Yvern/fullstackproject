@@ -4,6 +4,6 @@ export default [
     name: 'members',
     label: 'Recipient List',
     noValueError: 'Please provide a comma seperated list of emails.',
-    required: true
+    required: false
   }
 ];

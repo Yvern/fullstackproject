@@ -21,6 +21,12 @@ export const handleToken = token => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+export const deleteUser = (user, history) => async dispatch => {
+  history.push('/settings/results');
+  const res = await axios.post('/api/delete_user', user);
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
 /******** EVENT ACTIONS ********/
 
 export const submitEvent = (values, history) => async dispatch => {

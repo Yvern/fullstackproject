@@ -9,6 +9,7 @@ import BreadCrumbs from '../../General/BreadCrumbs';
 import TextContainer from '../../General/TextContainer';
 import SquadInfoBasic from './SquadInfoBasic';
 import SquadMembers from './SquadMembers';
+import SquadInfoEvents from './SquadInfoEvents';
 
 class SquadDetails extends Component {
   state = { editing: false };
@@ -39,7 +40,11 @@ class SquadDetails extends Component {
       default:
         return [
           <div key="info" className="col s12 xl6">
-            <SquadInfo squad={this.props.squad} />
+            <SquadInfo
+              squad={this.props.squad}
+              user={this.props.user}
+              events={this.props.events}
+            />
           </div>,
           <div key="participants" className="col s12 xl6">
             <SquadMembers squad={this.props.squad} />
@@ -79,20 +84,24 @@ class SquadDetails extends Component {
   }
 }
 
-const SquadInfo = ({ squad }) => {
+const SquadInfo = props => {
   return (
     <div className="row event-info-table-wrapper">
       <div className="col s12 m6 xl12">
-        <SquadInfoBasic squad={squad} />
+        <SquadInfoBasic {...props} />
       </div>
-      <div className="col s12 m6 xl12">Squad events upcoming</div>
+      <div className="col s12 m6 xl12">
+        <SquadInfoEvents events={props.events} />
+      </div>
     </div>
   );
 };
 
 function mapStateToProps(state) {
   return {
-    squad: state.squadData
+    squad: state.squadData.squad,
+    user: state.squadData.user,
+    events: state.squadData.events
   };
 }
 

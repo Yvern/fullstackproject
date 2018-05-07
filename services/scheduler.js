@@ -57,8 +57,8 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
           '!';
 
         //send emails and save updated information
-        await mailSend(organiserEvent, organiserReminderTemplate);
-        await mailSend(mappedEvents[i], reminderTemplate);
+        await mailSend(organiserEvent, organiserReminderTemplate, user);
+        await mailSend(mappedEvents[i], reminderTemplate, user);
 
         events[i].attendanceReminder.sent = true;
         await events[i].save();
@@ -126,8 +126,8 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
           : "The event '" + mappedEvents[i].title + "' has been cancelled.";
 
         //send emails and save updated information
-        await mailSend(organiserEvent, confirmationTemplate);
-        await mailSend(mappedEvents[i], confirmationTemplate);
+        await mailSend(organiserEvent, confirmationTemplate, user);
+        await mailSend(mappedEvents[i], confirmationTemplate, user);
 
         events[i].confirmationReminder.sent = true;
         await events[i].save();

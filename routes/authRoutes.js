@@ -1,4 +1,10 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+const requireLogin = require('../middlewares/requireLogin');
+
+const User = mongoose.model('User');
+const Event = mongoose.model('Event');
+const Squad = mongoose.model('Squad');
 
 module.exports = app => {
   /*
@@ -29,6 +35,30 @@ module.exports = app => {
   app.get('/api/logout', (req, res) => {
     req.logout();
     res.redirect('/');
+  });
+
+  app.post('/api/delete_user', requireLogin, async (req, res) => {
+    const user = req.body;
+    console.log(user);
+    try {
+      let userToDelete = await User.findById(user._id);
+      let squadsToDelete = await Squad.find({ _user: user._id });
+      let eventsToDelete = await Event.find({ _user: user._id });
+
+      eventsToDelete.forEach(event => {
+        event.remove();
+      });
+      squadsToDelete.forEach(squad => {
+        squad.remove();
+      });
+      userToDelete.remove();
+
+      req.logout();
+      res.send(null);
+    } catch (err) {
+      console.log(err);
+      res.send(user);
+    }
   });
 
   /*

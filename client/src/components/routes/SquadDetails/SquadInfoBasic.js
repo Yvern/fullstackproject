@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SquadInfoBasic = ({ squad }) => {
+const SquadInfoBasic = props => {
   return (
     <table>
       <tbody>
@@ -10,7 +10,7 @@ const SquadInfoBasic = ({ squad }) => {
               <i className="material-icons">group</i> Administrators
             </h6>
           </th>
-          <td>user</td>
+          <td>{props.user ? props.user.name : ''}</td>
         </tr>
         <tr>
           <th className="grey-text text-darken-3">

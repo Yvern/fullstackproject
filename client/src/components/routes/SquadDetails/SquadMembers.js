@@ -100,7 +100,7 @@ class SquadMembers extends Component {
 
 function mapStateToProps(state) {
   return {
-    squad: state.squadData
+    squad: state.squadData.squad
   };
 }
 

@@ -2,7 +2,7 @@ const keys = require('../../config/keys');
 
 /**
  * An email template generated based on the invite object given.
- * This email template is meant to send confirmations to invitees.
+ * This email template is meant to send a confirmation to the organiser.
  */
 module.exports = invite => {
   return `
@@ -21,15 +21,13 @@ module.exports = invite => {
       </a>
       </div>
 
-      <p>You let ${invite.senderName} know you can make it to their event ${
-    invite.title
-  }! </p>
+      <p>Hi ${invite.senderName}. </p>
     <p>${invite.text}</p>
-      <p>View the details about the event:</p>
+      <p>View the details about your event:</p>
       <div>
-        <a href="${keys.redirectDomain}/events/response/?event=${
+        <a href="${keys.redirectDomain}/events/details/?event=${
     invite.eventID
-  }&recipient=${invite.email}"/>
+  }"/>
   <button style=	"background-color: dodgerblue;
           color: white;
           border: none;
@@ -43,25 +41,8 @@ module.exports = invite => {
   </a>
       </div>
     </div>
-    <div style="margin: 3em;
-          padding: 2em;
-          padding-top: 0;
-          color: grey">
-      <p>Create your own sports event at Squad Square:</p>
-      <a href="https://squadsquare-test.herokuapp.com/">
-      <button style=	"background-color: dimgrey;
-              color: white;
-              border: none;
-              text-align: center;
-              text-decoration: none;
-              font-size: 16px;
-              padding: 0.5em 1em;
-              border-radius: 3px;">
-              Go to Squad Square
-              </button>
-      </a>
-    </div>
   </body>
 </html>
+
   `;
 };

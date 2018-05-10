@@ -47,7 +47,7 @@ const SquadCard = ({ squad, events }) => {
         <div className="card-image waves-effect waves-block waves-light">
           <img
             className="activator"
-            alt="squad-picture"
+            alt="squad"
             src={
               window.location.origin + '/images/football-sepia-small-rect.jpg'
             }

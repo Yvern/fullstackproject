@@ -4,10 +4,14 @@ import M from 'materialize-css';
 import { Link } from 'react-router-dom';
 import { AttendanceInformation } from '../Dashboard/EventFeed';
 
+/*
+* A React Component that displays a list of events that belong to this specific
+* squad.
+*/
 class SquadInfoEvents extends Component {
   componentDidMount() {
     var elem = document.querySelector('.collapsible');
-    var instance = M.Collapsible.init(elem, {});
+    M.Collapsible.init(elem, {});
   }
 
   renderEvents() {
@@ -75,7 +79,6 @@ class SquadInfoEvents extends Component {
   }
 
   render() {
-    console.log('props', this.props);
     return (
       <div className="event-info-notification-settings">
         <h6 className="grey-text text-darken-3">

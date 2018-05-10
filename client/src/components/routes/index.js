@@ -8,6 +8,9 @@ import SquadDetails from './SquadDetails/SquadDetails';
 import AccountSettings from './AccountSettings/AccountSettings';
 import AccountDeleteResults from './AccountSettings/AccountDeleteResults';
 
+/**
+ * All possible routes and the corresponding Components to render.
+ */
 const routes = [
   {
     name: 'Landing',

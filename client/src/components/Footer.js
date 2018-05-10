@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -17,24 +18,9 @@ const Footer = () => {
             <h5 className="white-text">Settings</h5>
             <ul>
               <li>
-                <a className="white-text" href="#!">
-                  Link 1
-                </a>
-              </li>
-              <li>
-                <a className="white-text" href="#!">
-                  Link 2
-                </a>
-              </li>
-              <li>
-                <a className="white-text" href="#!">
-                  Link 3
-                </a>
-              </li>
-              <li>
-                <a className="white-text" href="#!">
-                  Link 4
-                </a>
+                <Link to="/settings" className="white-text" href="#!">
+                  Account Settings
+                </Link>
               </li>
             </ul>
           </div>
@@ -42,23 +28,16 @@ const Footer = () => {
             <h5 className="white-text">Connect</h5>
             <ul>
               <li>
-                <a className="white-text" href="#!">
-                  Link 1
+                <a
+                  className="white-text"
+                  href="https://www.linkedin.com/in/rose-hissink/"
+                >
+                  LinkedIn
                 </a>
               </li>
               <li>
                 <a className="white-text" href="#!">
-                  Link 2
-                </a>
-              </li>
-              <li>
-                <a className="white-text" href="#!">
-                  Link 3
-                </a>
-              </li>
-              <li>
-                <a className="white-text" href="#!">
-                  Link 4
+                  Email: thesquadsquare@gmail.com
                 </a>
               </li>
             </ul>
@@ -69,7 +48,7 @@ const Footer = () => {
         <div className="container">
           Made by Rose Hissink |{' '}
           <a
-            className="brown-text text-lighten-3"
+            className="blue-text text-lighten-3"
             href="https://www.linkedin.com/in/rose-hissink/"
           >
             LinkedIn

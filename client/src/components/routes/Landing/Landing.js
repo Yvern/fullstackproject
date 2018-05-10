@@ -8,7 +8,7 @@ class Landing extends Component {
   componentDidMount() {
     //initialise materializeCSS javascript functionality
     var elem = document.querySelectorAll('.parallax');
-    var instance = M.Parallax.init(elem, {});
+    M.Parallax.init(elem, {});
   }
 
   render() {
@@ -17,16 +17,17 @@ class Landing extends Component {
         <Banner />
         <TextContainer>
           <TextColumn title="Simplify organising your matches" iconName="event">
-            Squad Square gives you the tools you need to organise and track
-            sports events. Keep track of who has responded to your invitation on
-            the website or just opt in to get email notifications about your
-            event.
+            Squad Square gives you the tools you need to organise and track your
+            own casual sports events. Keep track of who has responded to your
+            invitation on the website or just opt in to get email notifications
+            about your event.
           </TextColumn>
           <TextColumn title="Easily invite your friends" iconName="send">
-            It's as simple as adding a list of emails and clicking a button. All
-            recipients will receive an email with a link to respond whether they
-            can make it to the match or not. Add a minimum number of invitees
-            before the event will be confirmed to prevent disappointment.
+            It's as simple as adding a list of email addresses and clicking a
+            button. All recipients will receive an email with a link to respond
+            whether they can make it to the match or not. Add a minimum number
+            of invitees before the event will be confirmed to prevent
+            disappointment.
           </TextColumn>
 
           <TextColumn title="Notify and remind your Squad" iconName="comment">
@@ -46,18 +47,14 @@ class Landing extends Component {
             <h3>
               <i className="mdi-content-send brown-text" />
             </h3>
-            <h4>About SquadSquare</h4>
+            <h4>About Squad Square</h4>
             <p className="left-align light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              scelerisque id nunc nec volutpat. Etiam pellentesque tristique
-              arcu, non consequat magna fermentum ac. Cras ut ultricies eros.
-              Maecenas eros justo, ullamcorper a sapien id, viverra ultrices
-              eros. Morbi sem neque, posuere et pretium eget, bibendum
-              sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis
-              nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa
-              odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget
-              dignissim mauris, non tristique erat. Vestibulum ante ipsum primis
-              in faucibus orci luctus et ultrices posuere cubilia Curae;
+              Squad Square was created to provide a platform on which you can
+              organise your own casual sports matches in one central place. It
+              handles invitations, notifications and will be expanded to even
+              handle team selection for you! No need to check your inbox
+              continuously anymore, or worry about sending out notifications,
+              Squad Square will handle it for you.
             </p>
           </div>
         </TextContainer>
@@ -94,7 +91,7 @@ const Banner = () => {
               id="download-button"
               className="btn-large waves-effect waves-light light-blue lighten-1"
             >
-              Join Our Squad
+              Join Squad Square
             </a>
           </div>
         </div>

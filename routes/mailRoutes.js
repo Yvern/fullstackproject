@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const requireCredits = require('../middlewares/requireCredits');
 const inviteTemplate = require('../services/emailTemplates/inviteTemplate');
-const uuidv4 = require('uuid/v4');
 const mailSend = require('../services/mailSender');
 const sgMail = require('@sendgrid/mail');
 const keys = require('../config/keys');
@@ -10,10 +8,16 @@ sgMail.setApiKey(keys.sendGridKey);
 
 const Event = mongoose.model('Event');
 
+/**
+ * Exports all possible routes relating to emailing and connects them to the
+ * Express app.
+ */
 module.exports = app => {
-  //send email for event
+  /**
+   * Api call to send invites to all users that have not previously been
+   * invited already.
+   */
   app.post('/api/mail/event/invite', requireLogin, async (req, res) => {
-    console.log(req.body._id);
     try {
       let event = await Event.findById(req.body._id);
       //only invite recipients who haven't been invited before
@@ -22,17 +26,18 @@ module.exports = app => {
         return !recip.invited;
       });
 
+      //copy event object to safely filter recipients and email
       let eventCopy = JSON.parse(JSON.stringify(event));
-
       eventCopy.recipients = filteredRecipients;
 
-      console.log('reminderRecipients:', filteredRecipients);
-      console.log('User: ', req.user);
+      //send emails
       await mailSend(eventCopy, inviteTemplate, req.user);
 
+      //set each recipient's 'invited' status to true
       event.recipients.forEach(recip => (recip.invited = true));
       let savedEvent = await event.save();
-      console.log(savedEvent);
+
+      //send back the saved event
       res.send(savedEvent);
     } catch (err) {
       res.status(422).send(err);

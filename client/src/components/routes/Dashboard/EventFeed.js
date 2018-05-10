@@ -36,7 +36,7 @@ class EventCard extends Component {
   componentDidMount() {
     //Initialise materializeCSS javascript functionality for tooltips
     var tooltips = document.querySelectorAll('.tooltipped');
-    var instance = M.Tooltip.init(tooltips, { enterDelay: 500 });
+    M.Tooltip.init(tooltips, { enterDelay: 500 });
   }
 
   render() {
@@ -95,7 +95,7 @@ export const EventCalendar = ({ date }) => {
 */
 export const AttendanceInformation = ({ event }) => {
   let confirmations = calculateConfirmations(event);
-  let totalInvited = event.recipients.length;
+  //let totalInvited = event.recipients.length;
   let minimumParticipants = event.minimumParticipants;
   let hasEnoughParticipants = confirmations >= minimumParticipants;
   let attendanceBadgeStyle = hasEnoughParticipants
@@ -131,11 +131,11 @@ export const AttendanceInformation = ({ event }) => {
  */
 const calculateConfirmations = event => {
   let confirmations = 0;
-  event
-    ? event.recipients.forEach(
-        recip => (recip.attending ? confirmations++ : null)
-      )
-    : null;
+  if (event) {
+    event.recipients.forEach(
+      recip => (recip.attending ? confirmations++ : null)
+    );
+  }
   return confirmations;
 };
 

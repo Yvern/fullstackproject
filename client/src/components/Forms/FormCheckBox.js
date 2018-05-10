@@ -1,5 +1,4 @@
 import React from 'react';
-import M from 'materialize-css';
 
 export default ({ input, label, meta: { error, touched } }) => {
   return (

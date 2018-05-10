@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Segment, Form, Icon } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import validateEmails from '../../../utils/validateEmail';

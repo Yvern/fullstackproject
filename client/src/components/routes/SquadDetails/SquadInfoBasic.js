@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+* A stateless component that is meant to display basic information about a
+* squad in a list format.
+*/
 const SquadInfoBasic = props => {
   return (
     <table>

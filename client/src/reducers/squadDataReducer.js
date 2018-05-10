@@ -6,7 +6,12 @@ const initialState = {
   events: null
 };
 
-const authReducer = (state = initialState, action) => {
+/**
+ * This reducer handles the slice of state where information about individual
+ * squads is stored. This is used when details about a squad are retrieved from
+ * the database.
+ */
+const squadDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_SQUAD:
       return {
@@ -22,4 +27,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default squadDataReducer;

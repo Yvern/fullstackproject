@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../../actions/index';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
 import validateEmails from '../../../utils/validateEmail';
 import formFields from './formFields';
 import M from 'materialize-css';
 
 import Datetime from '../../DateTimePicker';
 import FormTextField from '../FormTextField';
-import FormDropdown from '../FormDropdown';
 import FormCheckBox from '../FormCheckBox';
 
 const FormToggleNotifications = props => {
@@ -76,6 +74,7 @@ class EventFormPageTwo extends Component {
           />
         );
       }
+      return null;
     });
   }
 

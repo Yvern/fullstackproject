@@ -9,20 +9,12 @@ import 'babel-polyfill';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './css/react-datetime.css';
-import M from 'materialize-css';
 
 import App from './components/App';
 import reducers from './reducers';
 
 import axios from 'axios';
 window.axios = axios;
-
-/*
-* Initialise materializeCSS javascript elements.
-*/
-//document.addEventListener('DOMContentLoaded', function(event) {
-//  M.AutoInit();
-//});
 
 /*
 * Create the redux store that contains the state tree for the UI, managing

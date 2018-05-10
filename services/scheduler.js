@@ -4,12 +4,17 @@ const mailSend = require('./mailSender');
 const reminderTemplate = require('./emailTemplates/reminderTemplate');
 const organiserReminderTemplate = require('./emailTemplates/organiserReminderTemplate');
 const confirmationTemplate = require('./emailTemplates/confirmationReminderTemplate');
+const organiserConfirmationTemplate = require('./emailTemplates/organiserConfirmationReminderTemplate');
 
 const Event = mongoose.model('Event');
 const User = mongoose.model('User');
 
-//Attendance reminder scheduler
-//Checks the database hourly for events for which an email needs to be sent
+/**
+ * A node schedule job that checks for reminders that need to be sent. It
+ * checks all Event documents in the database to see if they have reminders
+ * that they are subscribed to and that have a send date that is now or earlier,
+ * meaning the reminder should be sent.
+ */
 schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
   console.log(
     'Reminder Email Sending. Scheduled for: ' +
@@ -18,6 +23,8 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
       new Date()
   );
 
+  //find events that should have reminders sent. If the sendDate is less
+  //than the current date, a reminder should be sent.
   let events = await Event.find({
     'attendanceReminder.subscribed': true,
     'attendanceReminder.sendDate': { $lt: new Date() },
@@ -71,8 +78,12 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
   }
 });
 
-//Confirmation reminder scheduler
-//Checks the database hourly for events for which an email needs to be sent
+/**
+ * A node schedule job that checks for confirmations that need to be sent. It
+ * checks all Event documents in the database to see if they have confirmations
+ * that they are subscribed to and that have a send date that is now or earlier,
+ * meaning the confirmation should be sent.
+ */
 schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
   console.log(
     'Confirmation Email Sending. Scheduled for: ' +
@@ -81,6 +92,8 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
       new Date()
   );
 
+  //find events that should have confirmations sent. If the sendDate is less
+  //than the current date, a confirmation should be sent.
   let events = await Event.find({
     'confirmationReminder.subscribed': true,
     'confirmationReminder.sendDate': { $lt: new Date() },
@@ -126,7 +139,7 @@ schedule.scheduleJob('*/1 * * * *', async function(fireDate) {
           : "The event '" + mappedEvents[i].title + "' has been cancelled.";
 
         //send emails and save updated information
-        await mailSend(organiserEvent, confirmationTemplate, user);
+        await mailSend(organiserEvent, organiserConfirmationTemplate, user);
         await mailSend(mappedEvents[i], confirmationTemplate, user);
 
         events[i].confirmationReminder.sent = true;

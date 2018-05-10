@@ -5,7 +5,7 @@ import M from 'materialize-css';
 class EventInfoNotifications extends Component {
   componentDidMount() {
     var elem = document.querySelector('.collapsible');
-    var instance = M.Collapsible.init(elem, {});
+    M.Collapsible.init(elem, {});
   }
 
   renderNotifications() {

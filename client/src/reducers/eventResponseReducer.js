@@ -5,6 +5,11 @@ const initialState = {
   recipient: null
 };
 
+/**
+ * This reducer handles the slice of state where information about individual
+ * events is stored. This is used for both response, when a recipient responds
+ * to an invitation, and the detailed event view.
+ */
 const eventResponseReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_EVENT:

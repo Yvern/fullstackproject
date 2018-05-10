@@ -126,14 +126,11 @@ class EventForm extends Component {
           />
         );
       }
+      return null;
     });
   }
 
   render() {
-    let options = this.props.squads.map(squad => ({
-      text: squad.name,
-      value: squad._id
-    }));
     return (
       <div>
         <form onSubmit={this.props.handleSubmit(this.onEventFormSubmit)}>

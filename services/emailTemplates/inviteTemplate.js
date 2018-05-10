@@ -1,5 +1,9 @@
 const keys = require('../../config/keys');
 
+/**
+ * An email template generated based on the invite object given.
+ * This email template is meant to send invites to invitees.
+ */
 module.exports = invite => {
   return `
   <html>
@@ -43,9 +47,9 @@ module.exports = invite => {
         padding: 2em;
         padding-top: 0;
         color: grey">
-    <p>Create your own sports event at SquadSquare:</p>
+    <p>Create your own sports event at Squad Square:</p>
     <a href="https://squadsquare-test.herokuapp.com/">
-    <button style=	"background-color: grey;
+    <button style=	"background-color: dimgrey;
             color: white;
             border: none;
             text-align: center;
@@ -53,7 +57,7 @@ module.exports = invite => {
             font-size: 16px;
             padding: 0.5em 1em;
             border-radius: 3px;">
-            Sign Up
+            Go to Squad Square
             </button>
     </a>
   </div>

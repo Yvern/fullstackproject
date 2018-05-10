@@ -5,8 +5,6 @@ const ReminderSchema = require('./Reminder');
 
 /**
  * Event Schema
- * @TODO: Change location field to contain an object with lat and lng
- * @TODO: Change squad to Schema.Types.ObjectId, ref: 'Squad'
  */
 const eventSchema = new Schema({
   title: String,

@@ -9,6 +9,14 @@ import {
   CLEAR_SQUAD
 } from './types';
 
+/*
+* This file contains Redux actions that allow the Redux state to be modified.
+* Actions can have parameters passed if relevant.
+* For each action below, the action will potentially make an API request to
+* the server, then (if receiving data), it will dispatch the action object
+* to the Redux store, where it will modify the state based on the action type.
+*/
+
 /******** USER ACTIONS ********/
 
 export const fetchUser = () => async dispatch => {
@@ -41,7 +49,6 @@ export const fetchEventsForUser = () => async dispatch => {
   dispatch({ type: FETCH_EVENTS, payload: res.data });
 };
 
-//Clears current event data when leaving the page
 export const clearEvent = () => {
   return {
     type: CLEAR_EVENT
@@ -90,7 +97,6 @@ export const fetchSquadsForUser = () => async dispatch => {
   dispatch({ type: FETCH_SQUADS, payload: res.data });
 };
 
-//Clears current squad data when leaving the page
 export const clearSquad = () => {
   return {
     type: CLEAR_SQUAD

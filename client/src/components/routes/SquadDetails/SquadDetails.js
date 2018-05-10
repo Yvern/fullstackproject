@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
-import M from 'materialize-css';
-import moment from 'moment';
 
 import BreadCrumbs from '../../General/BreadCrumbs';
 import TextContainer from '../../General/TextContainer';
@@ -11,6 +9,12 @@ import SquadInfoBasic from './SquadInfoBasic';
 import SquadMembers from './SquadMembers';
 import SquadInfoEvents from './SquadInfoEvents';
 
+/*
+* A React Component that displays all details about a Squad. Includes the
+* SquadInfoBasic to contain basic info, SquadInfoEvents to contain info about
+* events that belong to this squad and SquadMembers to display info about the
+* members in the Squad.
+*/
 class SquadDetails extends Component {
   state = { editing: false };
 

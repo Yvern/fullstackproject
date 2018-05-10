@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import AddParticipant from '../EventDetails/AddParticipant';
 
+/*
+* A React Component that displays a list of members in a Squad and information
+* about each member.
+*/
 class SquadMembers extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +30,6 @@ class SquadMembers extends Component {
   }
 
   render() {
-    let numOfConfirmations = 0;
     let listItems = this.props.squad.members.map(member => {
       let response = (
         <i className="material-icons grey-text inline-icon">clear</i>

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const requireCredits = require('../middlewares/requireCredits');
 const inviteTemplate = require('../services/emailTemplates/inviteTemplate');
-const uuidv4 = require('uuid/v4');
 const mailSend = require('../services/mailSender');
 
 const Event = mongoose.model('Event');
@@ -11,23 +9,29 @@ const sgMail = require('@sendgrid/mail');
 const keys = require('../config/keys');
 sgMail.setApiKey(keys.sendGridKey);
 
+/**
+ * Exports all possible routes relating to events and connects them to the
+ * Express app.
+ */
 module.exports = app => {
-  app.get('/api/events/recipient', (req, res) => {
-    res.send('Thanks for replying!');
-  });
-
-  //Api call when recipients tries to access the event from the link in the email
+  /**
+   * Api call when recipients try to respond via the link in the email
+   */
   app.get('/api/events/event', async (req, res) => {
-    let event = await Event.findById(req.query.event);
-    res.send({ event: event, recipient: req.query.recipient });
-  });
-
-  app.post('/api/events/webhooks', (req, res) => {
-    res.send({});
+    try {
+      let event = await Event.findById(req.query.event);
+      res.send({ event: event, recipient: req.query.recipient });
+    } catch (err) {
+      console.log(
+        'An error occured while a recipient tried to access an event.' + err
+      );
+      res.send({ event: false, recipient: false });
+    }
   });
 
   /*
    * Api call when recipients respond in browser
+   * Registers their response (yes or no) and saves it
    */
   app.post('/api/events/respond', async (req, res) => {
     const { _id, recipient, response } = req.body;
@@ -50,7 +54,9 @@ module.exports = app => {
     res.send(savedEvent);
   });
 
-  //Get all events for the logged in user
+  /**
+   * Gets all events for the currently logged in user
+   */
   app.get('/api/events', requireLogin, async (req, res) => {
     //console.log(req.user);
     if (req.user) {
@@ -78,10 +84,12 @@ module.exports = app => {
     } = req.body;
 
     try {
+      //create event object from information given
       let eventInfo = {
         title,
-        subject: 'I want to invite you to an event!',
-        body: 'Please let me know if you can make it:',
+        subject:
+          "You've been invited to " + title + ' by ' + req.user.name + '!',
+        body: 'Please let them know if you can make it:',
         date,
         _user: req.user.id,
         dateCreated: Date.now(),
@@ -97,35 +105,35 @@ module.exports = app => {
         }
       };
 
+      //if a squad is given, set squad ID
       if (squad) {
         eventInfo._squad = squad;
       }
 
+      //if recipients are provided, add recipients
       if (recipients) {
         eventInfo.recipients = recipients
           .split(',')
           .map(email => ({ email: email.trim() }));
       }
 
+      //Create the event according to the Mongoose Model
       const newEvent = new Event(eventInfo);
 
+      //save the newly created event to the database
       let savedEvent = await newEvent.save();
 
-      //await sgMail.send(emails);
-      //await mailSend(savedEvent, inviteTemplate);
-
-      //update user account credits
-      //req.user.credits -= 1;
-      const user = await req.user.save();
-
+      //send the saved event in the response
       res.send(savedEvent);
     } catch (err) {
       res.status(422).send(err);
     }
   });
 
+  /**
+   * Api call to add a new recipient to an event.
+   */
   app.post('/api/events/addrecipient', requireLogin, async (req, res) => {
-    console.log(req.body);
     try {
       let event = await Event.findById(req.body.event._id);
       let recipient = {
@@ -136,8 +144,7 @@ module.exports = app => {
       //add new recipient to list
       event.recipients.push(recipient);
 
-      console.log(event.recipients);
-
+      //save the edited event
       let savedEvent = await event.save();
 
       res.send(savedEvent);

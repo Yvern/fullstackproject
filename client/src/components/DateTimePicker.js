@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Datetime from 'react-datetime';
-import { Form, Input } from 'semantic-ui-react';
 
 const DatePicker = ({
   input,
@@ -9,9 +8,11 @@ const DatePicker = ({
   disabled = false
 }) => {
   function renderInput(props, openCalendar, closeCalendar) {
+    /*
     function clear() {
       props.onChange({ target: { value: '' } });
     }
+    */
     return (
       <div className="input-field">
         <input

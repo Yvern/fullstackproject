@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import EventForm from '../../Forms/EventForm/EventCreate';
 import BreadCrumbs from '../../General/BreadCrumbs';

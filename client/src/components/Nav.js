@@ -9,14 +9,12 @@ class Nav extends Component {
   componentDidMount() {
     //initialise materializeCSS Sidenav component
     var elem = document.querySelectorAll('.sidenav');
-    var instance = M.Sidenav.init(elem, {});
+    M.Sidenav.init(elem, {});
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   renderContent() {
-    const { activeItem } = this.state;
-
     switch (this.props.auth) {
       case null:
       case undefined:
@@ -51,7 +49,7 @@ class Nav extends Component {
   render() {
     return (
       <div>
-        <nav className="white" role="navigation">
+        <nav className="white">
           <div id="nav-colourstrip" className="teal">
             <div className="nav-wrapper container">
               <a
@@ -64,7 +62,7 @@ class Nav extends Component {
               <ul className="right hide-on-med-and-down">
                 {this.renderContent()}
               </ul>
-              <a href="#" data-target="nav-mobile" className="sidenav-trigger">
+              <a href="#!" data-target="nav-mobile" className="sidenav-trigger">
                 <i className="material-icons">menu</i>
               </a>
             </div>

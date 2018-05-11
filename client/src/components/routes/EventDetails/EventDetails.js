@@ -11,6 +11,10 @@ import EventInfoBasic from './EventInfoBasic';
 import EventInfoNotifications from './EventInfoNotifications';
 import { EventCalendar } from '../Dashboard/EventFeed';
 
+/*
+* A React Component that displays details about an event, including the
+* title, EventInfoBasic, EventInfoNotifications and EventParticipants.
+*/
 class EventDetails extends Component {
   state = { editing: false };
 

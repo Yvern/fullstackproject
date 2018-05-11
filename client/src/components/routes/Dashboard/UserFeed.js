@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
+/*
+* A presentational component that displays summaries of all Events for a user
+* to the Dashboard.
+*/
 const UserFeed = props => {
   function calculateUpcomingEvents() {
     var pendingEvents = 0;

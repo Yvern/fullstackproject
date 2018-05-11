@@ -6,6 +6,9 @@ import * as actions from '../actions';
 import TestLayout from './TestLayout';
 import routes from './routes';
 
+/*
+* The central React Component that is rendered to the index.html file.
+*/
 class App extends Component {
   /*
   * When the App component (website) loads, fire the action to fetch details

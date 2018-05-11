@@ -7,6 +7,11 @@ import formFields from './formFields';
 import * as actions from '../../../actions/index';
 import validateEmails from '../../../utils/validateEmail';
 
+/*
+* A React Component that presents a form in which users can enter and submit
+* details about a new Squad they want to create.
+* This form's state is managed using Redux-form.
+*/
 class SquadForm extends Component {
   constructor(props) {
     super(props);

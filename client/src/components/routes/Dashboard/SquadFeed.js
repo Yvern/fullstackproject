@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /*
-* A stateless functional component that renders a list of squads onto the page
+* A presentational component that renders a list of squads onto the page
 */
 const SquadFeed = ({ squads }) => {
   //Renders individual Squads for each Squad in the list

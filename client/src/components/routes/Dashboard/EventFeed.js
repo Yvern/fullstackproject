@@ -4,7 +4,7 @@ import moment from 'moment';
 import M from 'materialize-css';
 
 /*
-* A stateless functional component to render a given list of events
+* A presentational functional component to render a given list of events
 */
 const EventFeed = ({ events }) => {
   function renderEvents() {

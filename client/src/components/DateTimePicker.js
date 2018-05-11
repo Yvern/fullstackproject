@@ -1,6 +1,9 @@
 import React from 'react';
 import Datetime from 'react-datetime';
 
+/*
+* A visual date picker component that allows for more intuitive date picking
+*/
 const DatePicker = ({
   input,
   label,

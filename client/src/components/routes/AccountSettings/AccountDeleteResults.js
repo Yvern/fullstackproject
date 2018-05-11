@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+/*
+* A presentational component that displays whether deleting the account has
+* been successful or not.
+*/
 const AccountDeleteResults = props => {
   if (props.auth) {
     return (

@@ -90,6 +90,9 @@ class SquadInfoEvents extends Component {
   }
 }
 
+/*
+* A simple Calendar that displays the Event's date
+*/
 const Calendar = ({ date }) => {
   return (
     <div className="grey-text text-darken-4">

@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 
+/*
+* A React Component that presents a navigation header to the website.
+* This component is very adaptive and presents differently on mobile or small
+* devices than large devices. 
+*/
 class Nav extends Component {
   state = { activeItem: 'home' };
 

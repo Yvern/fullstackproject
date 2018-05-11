@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import M from 'materialize-css';
 
+/*
+* A React Component that displays event notifications and information about them.
+* Each notification will have their send date and type displayed.
+*/
 class EventInfoNotifications extends Component {
   componentDidMount() {
     var elem = document.querySelector('.collapsible');
@@ -75,10 +79,10 @@ class EventInfoNotifications extends Component {
     }
 
     if (notifications.length > 0) {
-      return notifications.map(notification => {
+      return notifications.map((notification, i) => {
         if (notification.subscribed) {
           return (
-            <li className="compact">
+            <li className="compact" key={i}>
               <div className="collapsible-header">
                 {renderNotificationHeader(notification)}
               </div>

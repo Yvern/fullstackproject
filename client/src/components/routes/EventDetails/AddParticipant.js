@@ -5,6 +5,10 @@ import validateEmails from '../../../utils/validateEmail';
 import * as actions from '../../../actions';
 import FormTextField from '../../Forms/FormTextField';
 
+/*
+* A React Component that allows the user to add a participant to the list of
+* participants for an Event.
+*/
 class AddParticipant extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +47,7 @@ class AddParticipant extends Component {
                 className="btn green"
                 onClick={this.props.handleSubmit(this.onSubmit)}
                 type="submit"
+                disabled={this.props.pristine || this.props.submitting}
               >
                 <i className="material-icons">add</i>
               </button>

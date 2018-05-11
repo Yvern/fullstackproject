@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import M from 'materialize-css';
 
+/*
+* A React Component that allows the user to pick an item from a list of items.
+*/
 class DropDown extends Component {
   componentDidMount() {
     var elem = document.querySelectorAll('select');

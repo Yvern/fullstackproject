@@ -1,6 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 
+/*
+* A presentational component that displays basic information about an Event.
+* This includes Date, Minimum Participants and Location.
+*/
 const EventInfoBasic = ({ event }) => {
   let formattedDate = moment(event.eventDate).format('ddd, D MMM YYYY, h:mm a');
   let location = event.location || 'No location given';

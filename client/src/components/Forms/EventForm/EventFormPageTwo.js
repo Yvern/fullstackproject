@@ -35,6 +35,10 @@ const FormToggleNotifications = props => {
   );
 };
 
+/*
+* Second page of the Event form. Contains fields to enter the minimumParticipants,
+* toggle notifications and set their dates, and give a list of recipients.
+*/
 class EventFormPageTwo extends Component {
   componentDidMount() {
     M.updateTextFields();

@@ -1,3 +1,6 @@
+/*
+* List of fields for the Event form
+*/
 export default [
   { name: 'title', label: 'Event Title', page: 1, required: true },
   { name: 'squad', label: 'Squad (Optional)', page: 1, type: 'squad' },

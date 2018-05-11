@@ -27,6 +27,7 @@ class SquadMembers extends Component {
   onSubmit(values) {
     console.log('add recipient: ', values);
     this.props.addSquadMember(this.props.squad, values);
+    this.setState({ showAddParticipant: false });
   }
 
   render() {
@@ -84,7 +85,11 @@ class SquadMembers extends Component {
         </div>
         <div className="row participant-buttons">
           <button
-            onClick={this.showAddParticipant}
+            onClick={
+              this.state.showAddParticipant
+                ? this.hideAddParticipant
+                : this.showAddParticipant
+            }
             className="btn light-blue white-text waves-effect light-waves left"
           >
             Add Someone <i className="material-icons right white-text">add</i>

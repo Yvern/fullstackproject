@@ -6,6 +6,10 @@ import EventInfoBasic from '../EventDetails/EventInfoBasic';
 import TextContainer from '../../General/TextContainer';
 import ParticipantList from './ParticipantList';
 
+/*
+* A React Component that renders the information about an event that a recipient
+* is responding to.
+*/
 class EventResponse extends Component {
   componentDidMount() {
     this.props.fetchEvent(window.location.search);

@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../../actions';
 
+/*
+* A presentational component that presents the user with the option to delete
+* their account. More features will be included to change account settings.
+*/
 const AccountSettings = props => {
   return (
     <div className="container">

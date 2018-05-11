@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+* A presentational component that renders a list of recipients for the event
+* that a recipient is responding to.
+*/
 const ParticipantList = ({ recipients, recipientEmail }) => {
   function renderList() {
     return recipients.map(recip => {

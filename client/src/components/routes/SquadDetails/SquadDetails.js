@@ -88,6 +88,9 @@ class SquadDetails extends Component {
   }
 }
 
+/*
+* Presentational component containing both SquadInfoBasic and SquadInfoEvents
+*/
 const SquadInfo = props => {
   return (
     <div className="row event-info-table-wrapper">

@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 import TextContainer from './TextContainer';
 
+/*
+* A presentational component that displays a series of breadcrumbs to allow
+* the user to better navigate the website.
+*/
 const BreadCrumbs = ({ crumbPages }) => {
   function renderCrumbs() {
     return crumbPages.map(page => {

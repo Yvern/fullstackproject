@@ -1,3 +1,4 @@
+/* All possible Action types */
 export const FETCH_USER = 'FETCH_USER';
 
 export const FETCH_EVENT = 'FETCH_EVENT';

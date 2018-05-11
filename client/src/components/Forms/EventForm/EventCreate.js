@@ -5,6 +5,10 @@ import EventFormPageOne from './EventFormPageOne';
 import EventFormPageTwo from './EventFormPageTwo';
 import * as actions from '../../../actions';
 
+/*
+* React Component to display the different pages of the Event form.
+* Redux-form is used to manage the form state.
+*/
 class EventCreate extends Component {
   constructor(props) {
     super(props);

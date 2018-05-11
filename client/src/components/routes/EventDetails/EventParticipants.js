@@ -3,13 +3,25 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import AddParticipant from './AddParticipant';
 
+/*
+* A React Component that renders all participants to an event to a list.
+* The list shows participant names, emails, invitation status and response
+* status. It also has an 'Add Participant' option.
+*/
 class EventParticipants extends Component {
   constructor(props) {
     super(props);
-    this.state = { showAddParticipant: false };
+    this.state = { showAddParticipant: false, sendingInvites: false };
     this.showAddParticipant = this.showAddParticipant.bind(this);
     this.hideAddParticipant = this.hideAddParticipant.bind(this);
+    this.sendInvites = this.sendInvites.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.event.recipients !== this.props.event.recipients) {
+      this.setState({ sendingInvites: false });
+    }
   }
 
   showAddParticipant() {
@@ -18,6 +30,11 @@ class EventParticipants extends Component {
 
   hideAddParticipant() {
     this.setState({ showAddParticipant: false });
+  }
+
+  sendInvites() {
+    this.setState({ sendingInvites: true });
+    this.props.sendMail(this.props.event);
   }
 
   countResponses() {
@@ -33,6 +50,7 @@ class EventParticipants extends Component {
   onSubmit(values) {
     console.log('add recipient: ', values);
     this.props.addEventRecipient(this.props.event, values);
+    this.setState({ showAddParticipant: false });
   }
 
   render() {
@@ -57,7 +75,7 @@ class EventParticipants extends Component {
       }
 
       return (
-        <tr>
+        <tr key={recip._id}>
           <td>
             <h6>{recip.name || 'Guest'}</h6>
             {recip.email}
@@ -120,14 +138,19 @@ class EventParticipants extends Component {
         </div>
         <div className="row participant-buttons">
           <button
-            onClick={this.showAddParticipant}
+            onClick={
+              this.state.showAddParticipant
+                ? this.hideAddParticipant
+                : this.showAddParticipant
+            }
             className="btn light-blue white-text waves-effect light-waves left"
           >
             Add Someone <i className="material-icons right white-text">add</i>
           </button>
           <button
-            onClick={() => this.props.sendMail(this.props.event)}
+            onClick={this.sendInvites}
             className="btn green white-text waves-effect light-waves right"
+            disabled={this.state.sendingInvites}
           >
             Send Invites <i className="material-icons right white-text">send</i>
           </button>

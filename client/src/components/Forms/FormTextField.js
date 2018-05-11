@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+* A presentational component that presents an input field including related
+* error/data messages.
+*/
 export default ({ input, label, meta: { error, touched } }) => {
   return (
     <div className="input-field compact">

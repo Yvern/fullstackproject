@@ -12,6 +12,11 @@ import M from 'materialize-css';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 
+/*
+* First page of the Event form. This allows the user to enter the name of the
+* Event, the Squad it belongs to (optional), the Date of the Event and the
+* location (optional).
+*/
 class EventForm extends Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/*
+* A stateless, presentational component that contains footer information.
+*/
 const Footer = () => {
   return (
     <footer className="page-footer light-blue">

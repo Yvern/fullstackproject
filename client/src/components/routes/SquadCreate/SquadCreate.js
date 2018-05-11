@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import SquadForm from '../../Forms/SquadForm/SquadCreate';
 import BreadCrumbs from '../../General/BreadCrumbs';
 
+/*
+* A component that renders the SquadForm to create a new Squad
+*/
 class SquadCreate extends Component {
   render() {
     let crumbPages = [

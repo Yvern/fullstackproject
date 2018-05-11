@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import SquadForm from './SquadForm';
 
+/*
+* React Component that displays the SquadForm.
+* This component's state is managed using Redux-form.
+*/
 class SquadCreate extends Component {
   render() {
     return (

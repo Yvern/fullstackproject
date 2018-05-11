@@ -1,3 +1,6 @@
+/*
+* List of fields for the form.
+*/
 export default [
   { name: 'name', label: 'Squad Name', required: true },
   {

@@ -11,7 +11,7 @@
 //Please do NOT edit the variable names in this file
 
 module.exports = {
-  redirectDomain: 'http://localhost:3000',
+  redirectDomain: 'http://localhost:3000/',
   googleClientID: '--YOUR_GOOGLE_CLIENT_ID_HERE--',
   googleClientSecret: '--YOUR_GOOGLE_CLIENT_SECRET_HERE--',
   mongoURI: '--YOUR_MONGO_URI_HERE--',

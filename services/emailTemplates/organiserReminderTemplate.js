@@ -31,7 +31,7 @@ module.exports = invite => {
   } </p>
       <p>View the details about your event:</p>
       <div>
-        <a href="${keys.redirectDomain}/events/details/?event=${
+        <a href="${keys.redirectDomain}events/details/?event=${
     invite.eventID
   }"/>
   <button style=	"background-color: dodgerblue;

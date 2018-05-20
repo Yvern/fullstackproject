@@ -28,7 +28,7 @@ module.exports = invite => {
       <p>Please let them know if you can make it: </p>
 
       <div>
-        <a href="${keys.redirectDomain}/events/response/?event=${
+        <a href="${keys.redirectDomain}events/response/?event=${
     invite.eventID
   }&recipient=${invite.email}"/>
   <button style=	"background-color: dodgerblue;

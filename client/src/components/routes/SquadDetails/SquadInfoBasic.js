@@ -22,7 +22,7 @@ const SquadInfoBasic = props => {
               <i className="material-icons">event</i> Recurring Event Reminders
             </h6>
           </th>
-          <td>Some event reminders</td>
+          <td></td>
         </tr>
       </tbody>
     </table>

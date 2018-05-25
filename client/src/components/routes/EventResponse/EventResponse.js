@@ -74,8 +74,7 @@ const InvitationMessage = ({ event, recipient }) => {
       <h3>Hi {recipient.name || recipient.email}</h3>
       <p>
         You have been invited to the event{' '}
-        <span className="text-heavier">{event.title}</span> by{' '}
-        <b>TODO:Insert user name into message</b>. Let them know if you can make
+        <span className="text-heavier">{event.title}</span>. Let them know if you can make
         it by responding below:
       </p>
     </div>
